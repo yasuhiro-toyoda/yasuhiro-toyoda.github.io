@@ -1,18 +1,166 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ツモログ　サポートページ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ツモログ サポート | Musashi Studio</title>
+  <meta name="description" content="ツモログのサポートページです。お問い合わせ方法、返信目安、関連情報を掲載しています。" />
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      line-height: 1.7;
+      color: #222;
+      background: #f7f7f7;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    ul {
+      padding-left: 1.2em;
+      margin: 0 0 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #0b57d0;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 1px solid #0b57d0;
+      background: #0b57d0;
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 16px;
+    }
+
+    .button:hover {
+      opacity: 0.92;
+      text-decoration: none;
+    }
+
+    .note {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    code {
+      background: #f1f3f5;
+      padding: 0.15em 0.35em;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
-  <h1>アプリ名</h1>
-  <p>ツモログ</p>
-  <h1>問い合わせ方法</h1>
-  <p>次のリンク先のフォームからお問い合わせください</p>
-  <h1>返信目安</h1>
-  <p>ここにアプリのプライバシーポリシーを記載します。</p>
-  <h1>プライバシーポリシー</h1>
-  <p>https://musashistudio.com/apps/tsumolog/privacy/</p>
+  <main class="container">
+    <section class="card">
+      <h1>ツモログ サポート</h1>
+      <p>
+        ツモログをご利用いただきありがとうございます。<br />
+        アプリに関するご質問、不具合報告、ご要望は以下の方法でお問い合わせください。
+      </p>
+
+      <h2>お問い合わせ</h2>
+      <p>
+        お問い合わせは、以下のフォームから受け付けています。
+      </p>
+      <p>
+        <a
+          class="button"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSf5aODfbNoWymvjIaQoXQCO5uHjFp6NLFmtFUL4-KHUyBjfzQ/viewform?usp=header"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          お問い合わせフォームを開く
+        </a>
+      </p>
+
+      <p>
+        フォームが利用できない場合は、以下のメールアドレスまでご連絡ください。<br />
+        <a href="mailto:your-email@musashistudio.com">your-email@musashistudio.com</a>
+      </p>
+
+      <h2>返信について</h2>
+      <p>
+        通常、<strong>3営業日以内</strong>を目安に返信します。<br />
+        内容により、回答までお時間をいただく場合があります。
+      </p>
+
+      <h2>お問い合わせ時にあると助かる情報</h2>
+      <ul>
+        <li>利用している端末名（例：iPhone 16 Pro）</li>
+        <li>iOSのバージョン</li>
+        <li>アプリのバージョン</li>
+        <li>発生した事象の内容</li>
+        <li>再現手順</li>
+        <li>必要に応じてスクリーンショット</li>
+      </ul>
+
+      <h2>関連情報</h2>
+      <ul>
+        <li><a href="/apps/tsumolog/privacy/">プライバシーポリシー</a></li>
+        <li><a href="/apps/tsumolog/">アプリ紹介ページ</a></li>
+      </ul>
+
+      <h2>開発者</h2>
+      <p>
+        Yasuhiro Toyoda / Musashi Studio
+      </p>
+
+      <p class="note">
+        ※ このページは、App Store のサポートURLとして利用する想定のたたき台です。<br />
+        ※ <code>your-email@musashistudio.com</code> は実際の連絡先メールアドレスに置き換えてください。
+      </p>
+
+      <footer>
+        <p>&copy; 2026 Yasuhiro Toyoda</p>
+      </footer>
+    </section>
+  </main>
 </body>
 </html>
