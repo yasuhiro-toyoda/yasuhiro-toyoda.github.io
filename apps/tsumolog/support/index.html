@@ -1,13 +1,25 @@
+---
+layout: null
+title: ツモログ サポート
+description: ツモログのサポートページです。お問い合わせ方法、返信目安、関連情報を掲載しています。
+---
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="{{ site.lang | default: 'ja' }}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ツモログ サポート | Musashi Studio</title>
-  <meta
-    name="description"
-    content="ツモログのサポートページです。お問い合わせ方法、返信目安、関連情報を掲載しています。"
-  />
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ page.description | escape_once }}" />
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+  <meta property="og:locale" content="{{ site.seo.locale | default: 'ja_JP' }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{{ site.title }}" />
+  <meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
+  <meta property="og:description" content="{{ page.description | escape_once }}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta name="twitter:card" content="{{ site.seo.twitter_card | default: 'summary' }}" />
+  <meta name="twitter:title" content="{{ page.title }} | {{ site.title }}" />
+  <meta name="twitter:description" content="{{ page.description | escape_once }}" />
   <style>
     :root {
       --bg: #f5f1e8;
@@ -131,7 +143,7 @@
         >
           お問い合わせフォームを開く
         </a>
-        <a class="button-secondary" href="/contact/">サイトのお問い合わせページ</a>
+        <a class="button-secondary" href="{{ '/contact/' | relative_url }}">サイトのお問い合わせページ</a>
       </div>
 
       <h2>返信について</h2>
@@ -139,16 +151,16 @@
         原則として数日以内の確認を目安にしていますが、内容や状況によっては回答まで時間をいただく場合があります。
       </p>
 
-      <h2>関連リンク</h2>
+        <h2>関連リンク</h2>
       <ul>
-        <li><a href="/apps/tsumolog/">ツモログ紹介ページ</a></li>
-        <li><a href="/apps/tsumolog/privacy/">ツモログ プライバシーポリシー</a></li>
-        <li><a href="/apps/">アプリ一覧</a></li>
-        <li><a href="/">Musashi Studio トップ</a></li>
+        <li><a href="{{ '/apps/tsumolog/' | relative_url }}">ツモログ紹介ページ</a></li>
+        <li><a href="{{ '/apps/tsumolog/privacy/' | relative_url }}">ツモログ プライバシーポリシー</a></li>
+        <li><a href="{{ '/apps/' | relative_url }}">アプリ一覧</a></li>
+        <li><a href="{{ '/' | relative_url }}">{{ site.title }} トップ</a></li>
       </ul>
 
       <footer>
-        <p>Musashi Studio</p>
+        <p>{{ site.brand.operator_label }}</p>
       </footer>
     </section>
   </main>

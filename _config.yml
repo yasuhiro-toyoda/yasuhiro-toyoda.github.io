@@ -1,10 +1,18 @@
-title: Musashi Studio
+title: Musashi Digital Studio
 email: ""
 description: >-
-  Musashi Studio の開発ブログ兼アプリ案内サイト。作業ログ、開発メモ、アプリ更新情報を公開します。
+  Musashi Digital Studio は、個人開発の作業ログ、アプリ案内、サポート導線、関連ポリシーをまとめて公開するサイトです。
 baseurl: ""
 url: "https://musashistudio.com"
 lang: ja
+brand:
+  short_name: Musashi Studio
+  subtitle: 個人開発の作業ログ、アプリ案内、サポート導線をまとめたサイト
+  operator_label: Operated by Musashi Digital Studio
+  footer_description: 個人開発の作業ログ、アプリ情報、問い合わせ先、関連ポリシーを整理する拠点です。
+seo:
+  locale: ja_JP
+  twitter_card: summary
 markdown: kramdown
 kramdown:
   input: GFM
