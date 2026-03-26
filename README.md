@@ -28,4 +28,4 @@ bundle exec jekyll serve
 
 - 記事は [`_posts`](/_posts) に Markdown で追加します。
 - 固定ページは `index.html` や [`about/index.html`](/about/index.html) などの HTML ファイルで管理します。
-- Tsumolog の固定ページは [`apps/tsumolog/`](/apps/tsumolog/) 配下にあります。
+- ツモログの固定ページは [`apps/tsumolog/`](/apps/tsumolog/) 配下にあります。
