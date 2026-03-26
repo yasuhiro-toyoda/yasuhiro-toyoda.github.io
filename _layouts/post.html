@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<article class="post-layout wrap prose">
+  <header class="post-header">
+    <p class="eyebrow">{{ page.category }}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
+      <span>・</span>
+      <span>{{ site.title }}</span>
+    </p>
+    {% if page.excerpt %}
+      <p class="post-lead">{{ page.excerpt }}</p>
+    {% endif %}
+  </header>
+
+  <div class="ad-slot" aria-label="Reserved for future advertising">
+    将来的な広告・お知らせ枠をここに配置できます
+  </div>
+
+  <div class="post-body">
+    {{ content }}
+  </div>
+
+  <div class="ad-slot" aria-label="Reserved for future advertising">
+    記事下部の広告・関連導線枠を後から差し込めるように確保しています
+  </div>
+
+  <section class="post-footer-card">
+    <h2>次の導線</h2>
+    <ul>
+      <li><a href="{{ '/blog/' | relative_url }}">記事一覧を見る</a></li>
+      <li><a href="{{ '/apps/' | relative_url }}">アプリ一覧を見る</a></li>
+      <li><a href="{{ '/contact/' | relative_url }}">問い合わせる</a></li>
+    </ul>
+  </section>
+</article>

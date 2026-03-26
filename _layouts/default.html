@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'ja' }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
+    </title>
+    <meta
+      name="description"
+      content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}"
+    />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="wrap site-header__inner">
+          <div>
+            <a class="brand" href="{{ '/' | relative_url }}">Musashi Studio</a>
+            <p class="brand-subtitle">Yasuhiro Toyoda の作業ログとアプリ案内</p>
+          </div>
+          <nav class="site-nav" aria-label="Global">
+            <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
+            <a href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Blog</a>
+            <a href="{{ '/apps/' | relative_url }}"{% if page.url == '/apps/' or page.url contains '/apps/tsumolog/' %} aria-current="page"{% endif %}>Apps</a>
+            <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+            <a href="{{ '/contact/' | relative_url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="site-main">
+        {{ content }}
+      </main>
+
+      <footer class="site-footer">
+        <div class="wrap footer-grid">
+          <div>
+            <p class="footer-title">Musashi Studio</p>
+            <p class="footer-text">
+              個人開発の作業ログ、アプリ更新情報、サポート導線をまとめたサイトです。
+            </p>
+          </div>
+          <div>
+            <p class="footer-title">Links</p>
+            <ul class="footer-links">
+              <li><a href="{{ '/privacy/' | relative_url }}">サイトのプライバシーポリシー</a></li>
+              <li><a href="{{ '/apps/tsumolog/' | relative_url }}">Tsumolog</a></li>
+              <li><a href="{{ '/apps/tsumolog/support/' | relative_url }}">Tsumolog サポート</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="wrap footer-bottom">
+          <p>&copy; 2026 Yasuhiro Toyoda</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

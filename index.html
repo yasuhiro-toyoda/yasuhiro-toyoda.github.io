@@ -1,12 +1,100 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>プライバシーポリシー</title>
-</head>
-<body>
-  <h1>プライバシーポリシー</h1>
-  <p>ここにアプリのプライバシーポリシーを記載します。</p>
-</body>
-</html>
+---
+layout: default
+title: Home
+description: Musashi Studio のトップページ。作業ログ、開発メモ、アプリ更新情報を公開しています。
+---
+<section class="wrap hero">
+  <article class="hero-card">
+    <p class="eyebrow">Development Log</p>
+    <h1>作業ログを積み上げながら、アプリを育てるための拠点</h1>
+    <p>
+      Musashi Studio の開発ブログです。日々の作業ログ、開発メモ、アプリ更新情報を公開しつつ、
+      Tsumolog をはじめとした個人開発アプリの案内、問い合わせ導線、ポリシーをまとめています。
+    </p>
+    <p>
+      初期デザインはシンプルに保ち、記事を書き続けやすい運用を優先しています。後からレイアウトや広告枠を差し替えやすい構成です。
+    </p>
+    <div class="button-row">
+      <a class="button" href="{{ '/blog/' | relative_url }}">最新記事を見る</a>
+      <a class="button-secondary" href="{{ '/apps/' | relative_url }}">アプリ一覧へ</a>
+    </div>
+  </article>
+
+  <aside class="hero-side">
+    <section class="panel">
+      <h2>このサイトでやること</h2>
+      <ul>
+        <li>作業ログを記事として継続公開する</li>
+        <li>アプリ情報とサポート導線を整理する</li>
+        <li>将来の収益化に備えてサイト基盤を育てる</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>主要リンク</h2>
+      <ul class="list-plain">
+        <li><a href="{{ '/about/' | relative_url }}">プロフィール</a></li>
+        <li><a href="{{ '/contact/' | relative_url }}">問い合わせ</a></li>
+        <li><a href="{{ '/privacy/' | relative_url }}">サイトのプライバシーポリシー</a></li>
+      </ul>
+    </section>
+  </aside>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-heading">最新記事</h2>
+  <div class="grid grid-3">
+    {% for post in site.posts limit:3 %}
+      <article class="post-card">
+        <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2 class="section-heading">主なカテゴリ</h2>
+  <div class="grid grid-3">
+    <article class="category-card post-card">
+      <h3>作業ログ</h3>
+      <p>その日に進めたこと、判断理由、次にやることを残すための記事です。</p>
+    </article>
+    <article class="category-card post-card">
+      <h3>開発メモ</h3>
+      <p>実装で学んだこと、環境構築、細かい知見をまとめます。</p>
+    </article>
+    <article class="category-card post-card">
+      <h3>アプリ更新</h3>
+      <p>Tsumolog などの変更点、改善点、今後の予定を記録します。</p>
+    </article>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="grid grid-2">
+    <section class="info-card">
+      <p class="eyebrow">Apps</p>
+      <h2>Tsumolog を公開中</h2>
+      <p>
+        麻雀や日々の記録を積み上げるためのアプリとして Tsumolog を運用しています。
+        アプリ紹介、サポート、個別ポリシーへの導線をまとめています。
+      </p>
+      <div class="button-row">
+        <a class="button" href="{{ '/apps/tsumolog/' | relative_url }}">アプリ紹介へ</a>
+        <a class="button-secondary" href="{{ '/apps/tsumolog/support/' | relative_url }}">サポートへ</a>
+      </div>
+    </section>
+    <section class="info-card">
+      <p class="eyebrow">Contact</p>
+      <h2>問い合わせとポリシー</h2>
+      <p>
+        サイトとアプリの問い合わせ窓口は共通のフォームに集約しています。広告や計測はまだ導入していませんが、将来追加しやすい構造で運用します。
+      </p>
+      <div class="button-row">
+        <a class="button" href="{{ '/contact/' | relative_url }}">問い合わせる</a>
+        <a class="button-secondary" href="{{ '/privacy/' | relative_url }}">ポリシーを見る</a>
+      </div>
+    </section>
+  </div>
+</section>

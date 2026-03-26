@@ -1,0 +1,19 @@
+title: Musashi Studio
+email: ""
+description: >-
+  Musashi Studio の開発ブログ兼アプリ案内サイト。作業ログ、開発メモ、アプリ更新情報を公開します。
+baseurl: ""
+url: "https://musashistudio.com"
+lang: ja
+markdown: kramdown
+kramdown:
+  input: GFM
+permalink: /blog/:year/:month/:day/:title/
+future: false
+plugins:
+  - jekyll-feed
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

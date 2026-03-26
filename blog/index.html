@@ -1,0 +1,24 @@
+---
+layout: default
+title: Blog
+description: Musashi Studio の記事一覧です。作業ログ、開発メモ、アプリ更新情報を掲載しています。
+---
+<section class="wrap">
+  <header class="page-header">
+    <p class="eyebrow">Blog</p>
+    <h1>記事一覧</h1>
+    <p class="muted">
+      Markdown で管理している記事一覧です。作業ログ、開発メモ、アプリ更新の3カテゴリで積み上げます。
+    </p>
+  </header>
+
+  <div class="grid">
+    {% for post in site.posts %}
+      <article class="post-card">
+        <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+      </article>
+    {% endfor %}
+  </div>
+</section>

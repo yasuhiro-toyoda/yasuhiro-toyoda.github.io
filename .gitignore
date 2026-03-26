@@ -1,0 +1,9 @@
+/.bundle/
+/.bundle-user/
+/.gem/
+/.jekyll-cache/
+/.sass-cache/
+/_site/
+/vendor/bundle/
+/jekyll-serve.log
+/jekyll-serve.err.log
