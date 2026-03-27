@@ -294,15 +294,6 @@ img {
   color: #edf4f2;
 }
 
-.ad-slot {
-  border: 1px dashed var(--line);
-  border-radius: 18px;
-  padding: 1rem 1.2rem;
-  color: var(--muted);
-  background: rgba(255, 253, 248, 0.45);
-  text-align: center;
-}
-
 .page-header {
   margin-bottom: 1.8rem;
 }
