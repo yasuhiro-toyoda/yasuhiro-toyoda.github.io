@@ -7,9 +7,9 @@ url: "https://musashistudio.com"
 lang: ja
 brand:
   short_name: Musashi Studio
-  subtitle: 個人開発の作業ログ、アプリ案内、サポート導線をまとめたサイト
+  subtitle: アプリ開発の記録と公開情報を発信するデジタル拠点
   operator_label: Operated by Musashi Digital Studio
-  footer_description: 個人開発の作業ログ、アプリ情報、問い合わせ先、関連ポリシーを整理する拠点です。
+  footer_description: 開発中のアプリ情報や日々の記録を整理しながら、公開情報を継続的に発信していくサイトです。
 seo:
   locale: ja_JP
   twitter_card: summary
