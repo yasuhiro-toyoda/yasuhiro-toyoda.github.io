@@ -109,13 +109,12 @@ img {
 .hero {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   margin-bottom: 2.5rem;
 }
 
 .hero-card,
-.panel,
 .post-card,
 .info-card,
 .post-footer-card {
@@ -140,17 +139,10 @@ img {
   color: var(--muted);
 }
 
-.hero-side {
-  display: grid;
-  gap: 1rem;
-}
-
-.panel,
 .info-card {
   padding: 1.4rem;
 }
 
-.panel h2,
 .info-card h2,
 .section-heading {
   margin: 0 0 0.8rem;
