@@ -132,6 +132,11 @@ img {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.1;
+  text-wrap: balance;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .hero-card p {
@@ -345,5 +350,10 @@ img {
   .site-header__inner {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .hero-card h1 {
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+    line-height: 1.25;
   }
 }
