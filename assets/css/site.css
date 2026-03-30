@@ -300,6 +300,55 @@ img {
   font-size: clamp(2rem, 4vw, 3rem);
 }
 
+.about-page {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.about-page__header {
+  margin-bottom: 0;
+}
+
+.about-lead {
+  padding: 1.8rem;
+}
+
+.about-section {
+  margin-top: 1.7rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(34, 91, 82, 0.16);
+}
+
+.about-section h2 {
+  margin-bottom: 1rem;
+}
+
+.about-list li {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.about-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.about-list {
+  display: grid;
+  gap: 0;
+  margin-top: 0.2rem;
+}
+
+.about-list li + li {
+  margin-top: 0;
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 2rem 0 1.6rem;
