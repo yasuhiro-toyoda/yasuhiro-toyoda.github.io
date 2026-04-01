@@ -26,7 +26,7 @@ body {
   background:
     radial-gradient(circle at top left, rgba(216, 235, 228, 0.8), transparent 30%),
     linear-gradient(180deg, #f7f3ea 0%, var(--bg) 100%);
-  font-family: Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
   line-height: 1.8;
 }
 
@@ -71,8 +71,8 @@ img {
 .brand {
   display: inline-block;
   font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-weight: 900;
+  letter-spacing: 0.01em;
   color: var(--text);
   text-decoration: none;
 }
