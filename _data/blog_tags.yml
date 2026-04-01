@@ -1,0 +1,12 @@
+- slug: app-dev
+  label: アプリ開発
+- slug: feature
+  label: 機能追加
+- slug: update
+  label: 更新情報
+- slug: ui-ux
+  label: UI改善
+- slug: dev-memo
+  label: 開発メモ
+- slug: solo-dev
+  label: 個人開発

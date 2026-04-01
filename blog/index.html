@@ -3,22 +3,237 @@ layout: default
 title: ブログ
 description: Musashi Digital Studio の記事一覧です。個人開発の作業ログ、開発メモ、アプリ更新情報を掲載しています。
 ---
+{% assign tag_definitions = site.data.blog_tags | default: empty %}
+{% assign posts_per_page = 25 %}
 <section class="wrap">
   <header class="page-header">
     <p class="eyebrow">Blog</p>
     <h1>記事一覧</h1>
     <p class="muted">
-     作業ログ、開発メモ、アプリ更新の3カテゴリを中心に公開していきます。
+      作業ログ、開発メモ、アプリ更新の3カテゴリを中心に公開していきます。
     </p>
   </header>
 
-  <div class="grid">
-    {% for post in site.posts %}
-      <article class="post-card">
-        <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
-        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-        <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
-      </article>
-    {% endfor %}
-  </div>
+  {% if tag_definitions.size > 0 %}
+    <details class="tag-filter-card" data-tag-filter-panel>
+      <summary class="tag-filter-card__summary" aria-labelledby="blog-tag-filter-title">
+        <div class="tag-filter-card__summary-text">
+          <p class="eyebrow">Tags</p>
+          <h2 id="blog-tag-filter-title">タグで記事を絞り込む</h2>
+        </div>
+        <div class="tag-filter-card__status">
+          <span class="tag-filter-card__current" data-tag-filter-current>すべて</span>
+          <span class="tag-filter-card__toggle" data-tag-filter-toggle>開く</span>
+        </div>
+      </summary>
+      <div class="tag-filter-card__body">
+        <p class="muted">普段は小さくたたんで表示し、必要なときだけ開けるようにしています。複数選択にも対応し、選んだタグをすべて含む記事だけを表示します。今後の記事では front matter の <code>tags:</code> に slug を指定すると反映されます。</p>
+        <div class="tag-filter" role="group" aria-label="記事タグの絞り込み">
+          <button class="tag-filter__button is-active" type="button" data-tag-filter-button="all" aria-pressed="true">すべて</button>
+          {% for tag in tag_definitions %}
+            <button class="tag-filter__button" type="button" data-tag-filter-button="{{ tag.slug }}" aria-pressed="false">{{ tag.label }}</button>
+          {% endfor %}
+        </div>
+      </div>
+    </details>
+  {% endif %}
+
+  {% if site.posts and site.posts.size > 0 %}
+    <div class="grid" data-post-grid>
+      {% for post in site.posts %}
+        {% assign post_tags = post.tags | default: empty %}
+        <article class="post-card" data-post-card data-tags="{{ post_tags | join: ',' | escape }}"{% if forloop.index > posts_per_page %} hidden{% endif %}>
+          <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
+          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
+          {% include tag-list.html tags=post_tags link_to_blog=true %}
+        </article>
+      {% endfor %}
+    </div>
+    <p class="post-empty-state" data-post-empty-state hidden>選択したタグに一致する記事はまだありません。</p>
+    <nav class="post-pagination" data-post-pagination aria-label="記事一覧のページ切り替え" hidden>
+      <button class="post-pagination__button" type="button" data-page-action="prev">前の25件</button>
+      <p class="post-pagination__status" data-post-pagination-status></p>
+      <button class="post-pagination__button" type="button" data-page-action="next">次の25件</button>
+    </nav>
+  {% else %}
+    <section class="info-card">
+      <h2>記事は準備中です</h2>
+      <p>タグ機能は先に用意しているので、今後追加する記事で <code>tags:</code> に <code>app-dev</code> や <code>dev-memo</code> などを指定すると一覧と個別ページに表示されます。</p>
+    </section>
+  {% endif %}
 </section>
+
+{% if tag_definitions.size > 0 or site.posts.size > 0 %}
+  <script>
+    (() => {
+      const PAGE_SIZE = {{ posts_per_page }};
+      const buttons = Array.from(document.querySelectorAll("[data-tag-filter-button]"));
+      const cards = Array.from(document.querySelectorAll("[data-post-card]"));
+      const emptyState = document.querySelector("[data-post-empty-state]");
+      const pagination = document.querySelector("[data-post-pagination]");
+      const paginationStatus = document.querySelector("[data-post-pagination-status]");
+      const previousButton = document.querySelector('[data-page-action="prev"]');
+      const nextButton = document.querySelector('[data-page-action="next"]');
+      const filterPanel = document.querySelector("[data-tag-filter-panel]");
+      const filterCurrent = document.querySelector("[data-tag-filter-current]");
+      const filterToggle = document.querySelector("[data-tag-filter-toggle]");
+
+      if (!buttons.length && !cards.length) {
+        return;
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const tagEntries = buttons.map((button) => [
+        button.dataset.tagFilterButton || "all",
+        button.textContent.trim() || "すべて"
+      ]);
+      const tagLabels = new Map(tagEntries);
+      const allowedTags = new Set(tagLabels.keys());
+      const initialTags = Array.from(new Set(params.getAll("tag").filter((tag) => allowedTags.has(tag) && tag !== "all")));
+      const parsedPage = Number.parseInt(params.get("page") || "1", 10);
+      const state = {
+        activeTags: initialTags,
+        currentPage: Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1
+      };
+
+      const updatePanelState = () => {
+        const selectedLabels = state.activeTags
+          .map((tag) => tagLabels.get(tag))
+          .filter(Boolean);
+
+        if (filterCurrent) {
+          if (!selectedLabels.length) {
+            filterCurrent.textContent = "すべて";
+          } else if (selectedLabels.length <= 2) {
+            filterCurrent.textContent = selectedLabels.join(" / ");
+          } else {
+            filterCurrent.textContent = `${selectedLabels.length}件選択`;
+          }
+        }
+
+        if (filterToggle) {
+          filterToggle.textContent = filterPanel && filterPanel.open ? "閉じる" : "開く";
+        }
+      };
+
+      const updateButtons = () => {
+        buttons.forEach((button) => {
+          const buttonTag = button.dataset.tagFilterButton || "all";
+          const isActive = buttonTag === "all"
+            ? state.activeTags.length === 0
+            : state.activeTags.includes(buttonTag);
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+      };
+
+      const getFilteredCards = () => {
+        if (!cards.length) {
+          return [];
+        }
+
+        return cards.filter((card) => {
+          const tags = (card.dataset.tags || "")
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter(Boolean);
+
+          return state.activeTags.length === 0 || state.activeTags.every((tag) => tags.includes(tag));
+        });
+      };
+
+      const updateCards = () => {
+        const filteredCards = getFilteredCards();
+        const totalPages = Math.max(1, Math.ceil(filteredCards.length / PAGE_SIZE));
+        state.currentPage = Math.min(state.currentPage, totalPages);
+
+        const firstIndex = (state.currentPage - 1) * PAGE_SIZE;
+        const lastIndex = firstIndex + PAGE_SIZE;
+
+        cards.forEach((card) => {
+          card.hidden = true;
+        });
+
+        filteredCards.forEach((card, index) => {
+          card.hidden = index < firstIndex || index >= lastIndex;
+        });
+
+        if (emptyState) {
+          emptyState.hidden = filteredCards.length !== 0;
+        }
+
+        if (pagination && paginationStatus && previousButton && nextButton) {
+          const hasMultiplePages = filteredCards.length > PAGE_SIZE;
+          pagination.hidden = !hasMultiplePages;
+          paginationStatus.textContent = `ページ ${state.currentPage} / ${totalPages} ・ ${Math.min(PAGE_SIZE, Math.max(filteredCards.length - firstIndex, 0))}件表示 / 全${filteredCards.length}件`;
+          previousButton.disabled = state.currentPage <= 1;
+          nextButton.disabled = state.currentPage >= totalPages;
+        }
+      };
+
+      const syncUrl = () => {
+        const nextUrl = new URL(window.location.href);
+
+        nextUrl.searchParams.delete("tag");
+        state.activeTags.forEach((tag) => {
+          nextUrl.searchParams.append("tag", tag);
+        });
+
+        if (state.currentPage <= 1) {
+          nextUrl.searchParams.delete("page");
+        } else {
+          nextUrl.searchParams.set("page", String(state.currentPage));
+        }
+
+        window.history.replaceState({}, "", nextUrl);
+      };
+
+      const render = () => {
+        updatePanelState();
+        updateButtons();
+        updateCards();
+        syncUrl();
+      };
+
+      const toggleFilter = (targetTag) => {
+        if (targetTag === "all") {
+          state.activeTags = [];
+        } else if (state.activeTags.includes(targetTag)) {
+          state.activeTags = state.activeTags.filter((tag) => tag !== targetTag);
+        } else {
+          state.activeTags = [...state.activeTags, targetTag];
+        }
+
+        state.currentPage = 1;
+        render();
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          toggleFilter(button.dataset.tagFilterButton || "all");
+        });
+      });
+
+      if (previousButton) {
+        previousButton.addEventListener("click", () => {
+          state.currentPage -= 1;
+          render();
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener("click", () => {
+          state.currentPage += 1;
+          render();
+        });
+      }
+
+      if (filterPanel) {
+        filterPanel.addEventListener("toggle", updatePanelState);
+      }
+
+      render();
+    })();
+  </script>
+{% endif %}

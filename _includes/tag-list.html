@@ -1,0 +1,21 @@
+{% assign tags = include.tags | default: empty %}
+{% if tags and tags.size > 0 %}
+  <ul class="tag-list" aria-label="記事タグ">
+    {% for tag in tags %}
+      {% assign tag_label = tag %}
+      {% for tag_definition in site.data.blog_tags %}
+        {% if tag_definition.slug == tag %}
+          {% assign tag_label = tag_definition.label %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      <li>
+        {% if include.link_to_blog %}
+          <a class="tag-pill" href="{{ '/blog/' | relative_url }}?tag={{ tag | uri_escape }}">{{ tag_label }}</a>
+        {% else %}
+          <span class="tag-pill">{{ tag_label }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
