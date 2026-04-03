@@ -7,9 +7,13 @@ layout: default
     <h1>{{ page.title }}</h1>
     {% include tag-list.html tags=page.tags link_to_blog=true %}
     <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
-      <span>・</span>
-      <span>{{ site.title }}</span>
+      <span>作成日: <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time></span>
+      {% assign published_date = page.date | date: "%Y-%m-%d" %}
+      {% assign modified_date = page.last_modified_at | date: "%Y-%m-%d" %}
+      {% if page.last_modified_at and modified_date != published_date %}
+        <span>・</span>
+        <span>更新日: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date: "%Y年%-m月%-d日" }}</time></span>
+      {% endif %}
     </p>
     {% if page.excerpt %}
       <p class="post-lead">{{ page.excerpt }}</p>

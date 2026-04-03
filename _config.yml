@@ -5,6 +5,7 @@ description: >-
 baseurl: ""
 url: "https://musashistudio.com"
 lang: ja
+timezone: Asia/Tokyo
 brand:
   short_name: Musashi Studio
   subtitle: アプリ開発の記録と最新情報を発信するデジタル拠点
