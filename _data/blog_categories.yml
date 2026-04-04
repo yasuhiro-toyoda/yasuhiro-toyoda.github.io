@@ -1,0 +1,12 @@
+- slug: development
+  label: 開発
+  description: アプリ開発や実装に関する内容をまとめるカテゴリです。
+- slug: app-info
+  label: アプリ情報
+  description: 公開アプリの紹介や更新情報をまとめるカテゴリです。
+- slug: productivity
+  label: 作業効率化
+  description: 開発環境や作業効率を高める工夫をまとめるカテゴリです。
+- slug: other
+  label: その他
+  description: 上記に収まらない話題や運用メモをまとめるカテゴリです。

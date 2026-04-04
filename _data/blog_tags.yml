@@ -1,12 +1,18 @@
-- slug: app-dev
-  label: アプリ開発
+- slug: solo-dev
+  label: 個人開発
+- slug: learning-log
+  label: 学習記録
+- slug: beginner
+  label: 初心者
 - slug: feature
   label: 機能追加
 - slug: update
   label: 更新情報
 - slug: ui-ux
   label: UI改善
+- slug: tsumolog
+  label: ツモログ
 - slug: dev-memo
   label: 開発メモ
-- slug: solo-dev
-  label: 個人開発
+- slug: AI
+  label: AI
