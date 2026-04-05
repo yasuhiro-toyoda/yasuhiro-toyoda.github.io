@@ -4,6 +4,8 @@
   label: 学習記録
 - slug: beginner
   label: 初心者
+- slug: app-dev
+  label: アプリ開発
 - slug: feature
   label: 機能追加
 - slug: update
