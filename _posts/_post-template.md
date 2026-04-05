@@ -5,6 +5,7 @@ layout: post
 title: ""
 description: ""
 date: 2026-04-01 00:00:00 +0900
+updated_at:
 category: 開発
 tags:
   - feature

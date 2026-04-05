@@ -3,14 +3,29 @@ layout: default
 ---
 <article class="post-layout blog-post wrap prose">
   <header class="post-header blog-post__header">
+    {% assign created_at = page.date %}
+    {% assign created_at_key = created_at | date: "%Y-%m-%d %H:%M:%S %z" %}
+    {% assign updated_at = page.updated_at %}
+    {% assign updated_at_key = page.updated_at | date: "%Y-%m-%d %H:%M:%S %z" %}
     <p class="eyebrow">{{ page.category }}</p>
     <h1>{{ page.title }}</h1>
     {% include tag-list.html tags=page.tags link_to_blog=true %}
-    <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
-      <span>・</span>
-      <span>{{ site.title }}</span>
-    </p>
+    <dl class="post-meta">
+      <div class="post-meta__item">
+        <dt class="post-meta__label">作成日</dt>
+        <dd class="post-meta__value">
+          <time datetime="{{ created_at | date_to_xmlschema }}">{{ created_at | date: "%Y年%-m月%-d日" }}</time>
+        </dd>
+      </div>
+      <div class="post-meta__item">
+        <dt class="post-meta__label">更新日</dt>
+        <dd class="post-meta__value">
+          {% if updated_at and updated_at_key != created_at_key %}
+            <time datetime="{{ updated_at | date_to_xmlschema }}">{{ updated_at | date: "%Y年%-m月%-d日" }}</time>
+          {% endif %}
+        </dd>
+      </div>
+    </dl>
     {% if page.excerpt %}
       <p class="post-lead">{{ page.excerpt }}</p>
     {% endif %}

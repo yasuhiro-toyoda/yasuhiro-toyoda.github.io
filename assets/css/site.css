@@ -274,6 +274,30 @@ img {
   color: var(--muted);
 }
 
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.1rem;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.post-meta__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.post-meta__label,
+.post-meta__value {
+  margin: 0;
+}
+
+.post-meta__label {
+  font-weight: 700;
+}
+
 .tag-filter-card {
   margin-bottom: 1.6rem;
   background: rgba(255, 253, 248, 0.92);
@@ -650,7 +674,6 @@ img {
 }
 
 .blog-post .post-meta {
-  margin-top: 1rem;
   font-size: 0.95rem;
 }
 
