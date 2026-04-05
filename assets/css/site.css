@@ -462,6 +462,43 @@ img {
   color: #edf4f2;
 }
 
+.post-body pre code {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.post-body .highlighter-rouge,
+.post-body .highlight {
+  border-radius: 16px;
+}
+
+.post-body .highlight pre {
+  margin: 0;
+}
+
+.post-body .highlight .nb,
+.post-body .highlight .nv {
+  color: #8bd3dd;
+}
+
+.post-body .highlight .nt {
+  color: #f2b880;
+}
+
+.post-body .highlight .s,
+.post-body .highlight .s1,
+.post-body .highlight .s2 {
+  color: #f6d38a;
+}
+
+.post-body .highlight .c,
+.post-body .highlight .c1,
+.post-body .highlight .cm {
+  color: #9ab0b5;
+}
+
 .page-header {
   margin-bottom: 1.8rem;
 }
