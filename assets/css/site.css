@@ -1,9 +1,11 @@
 :root {
-  --bg: #f5f1e8;
+  --bg: #f8f5ee;
+  --bg-soft: #fbf9f4;
   --surface: #fffdf8;
   --surface-alt: #efe7d8;
-  --text: #23313a;
-  --muted: #5a6a73;
+  --surface-soft: #f4eee3;
+  --text: #1b272f;
+  --muted: #4b5a63;
   --line: #d6c8b2;
   --accent: #225b52;
   --accent-soft: #d8ebe4;
@@ -54,7 +56,7 @@ img {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(12px);
-  background: rgba(247, 243, 234, 0.88);
+  background: rgba(251, 249, 244, 0.88);
   border-bottom: 1px solid rgba(214, 200, 178, 0.9);
 }
 
@@ -505,7 +507,7 @@ img {
 
 .blog-index__filter[open] .blog-index__filter-button {
   border-color: rgba(34, 91, 82, 0.34);
-  background: #f9f6ef;
+  background: var(--bg-soft);
 }
 
 .blog-index__filter-current {
@@ -819,7 +821,7 @@ img {
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 2rem 0 1.6rem;
-  background: rgba(239, 231, 216, 0.7);
+  background: var(--surface-soft);
 }
 
 .footer-grid {
