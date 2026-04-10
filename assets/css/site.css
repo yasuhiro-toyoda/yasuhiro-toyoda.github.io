@@ -1537,7 +1537,7 @@ a:hover {
 }
 
 .post-body code {
-  background: var(--surface-alt);
+  background: #f0f1f3;
   color: var(--accent-strong);
 }
 
