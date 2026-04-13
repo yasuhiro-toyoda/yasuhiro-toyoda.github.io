@@ -66,6 +66,7 @@ img {
   backdrop-filter: blur(12px);
   background: var(--chrome-bg);
   border-bottom: 1px solid var(--chrome-border);
+  transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
 
 .site-header__inner {
@@ -1561,6 +1562,15 @@ a:hover {
 }
 
 @media (max-width: 800px) {
+  .site-header {
+    will-change: transform;
+  }
+
+  .site-header--hidden {
+    transform: translateY(calc(-1 * var(--site-header-height, 100%)));
+    box-shadow: none;
+  }
+
   .site-main {
     padding: 2.3rem 0 3.8rem;
   }
@@ -1697,6 +1707,12 @@ a:hover {
   .blog-index__filter-button {
     width: auto;
     justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
   }
 }
 
