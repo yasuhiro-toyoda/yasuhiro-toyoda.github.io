@@ -64,14 +64,14 @@ on:
   workflow_dispatch:
 ```
 
-ここでは、ワークフローを「定期実行」するか、「手動実行」するかを決めています。
+ここでは、ワークフローを**「定期実行」**するか、**「手動実行」**するかを決めています。
 
 - `schedule`: cron 形式で自動実行
 - `workflow_dispatch`: GitHub の画面から手動実行
 
 最初のうちは `workflow_dispatch` を入れておくのがおすすめです。
 
-定期実行だけにすると、デバッグ中に待ち時間が発生して地味にしんどいです。
+定期実行だけにすると、設定した時間まで実行されずデバッグが遅々として進みません。
 
 {% include bookmark-card.html
   url="https://crontab.guru/"
@@ -83,7 +83,7 @@ on:
 {% capture schedule_notice %}
 定期実行は、設定した時刻どおりに毎回ぴったり動くとは限りません。
 
-アクセス集中の時間帯は遅延したり、まれに実行されないこともあります。
+アクセス集中の時間帯は遅延したり、特に午前7時から11時ごろまでは実行されないこともあります。
 {% endcapture %}
 {% include callout.html type="warning" title="schedule の注意点" icon="⚠️" content=schedule_notice %}
 
