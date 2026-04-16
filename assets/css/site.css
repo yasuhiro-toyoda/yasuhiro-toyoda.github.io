@@ -878,6 +878,164 @@ img {
   margin-bottom: 0.9rem;
 }
 
+.blog-post .post-body .callout {
+  --callout-rgb: var(--accent-rgb);
+  margin: 1.45rem 0;
+  padding: 1rem 1.1rem 1.05rem;
+  border: 1px solid rgba(var(--callout-rgb), 0.16);
+  border-left: 4px solid rgba(var(--callout-rgb), 0.42);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(var(--callout-rgb), 0.09), rgba(var(--callout-rgb), 0.03));
+  box-shadow: 0 12px 28px rgba(16, 35, 77, 0.05);
+}
+
+.blog-post .post-body .callout--tip {
+  --callout-rgb: 31, 90, 84;
+}
+
+.blog-post .post-body .callout--info {
+  --callout-rgb: 35, 100, 210;
+}
+
+.blog-post .post-body .callout--warning {
+  --callout-rgb: 181, 126, 0;
+}
+
+.blog-post .post-body .callout--danger {
+  --callout-rgb: 185, 62, 62;
+}
+
+.blog-post .post-body .callout__header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--ui-font);
+}
+
+.blog-post .post-body .callout__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: rgba(var(--callout-rgb), 0.12);
+  font-size: 0.94rem;
+  line-height: 1;
+}
+
+.blog-post .post-body .callout__title {
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.blog-post .post-body .callout__body {
+  color: #314254;
+}
+
+.blog-post .post-body .callout__body > :last-child,
+.blog-post .post-body .callout__body > :last-child > :last-child {
+  margin-bottom: 0;
+}
+
+.blog-post .post-body .callout__body p {
+  margin-bottom: 0.85rem;
+}
+
+.blog-post .post-body .callout__body ul,
+.blog-post .post-body .callout__body ol {
+  margin-bottom: 0.85rem;
+}
+
+.blog-post .post-body .bookmark-card-wrap {
+  margin: 1.5rem 0;
+}
+
+.blog-post .post-body .bookmark-card {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(var(--accent-rgb), 0.16);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.06), rgba(var(--accent-rgb), 0.015));
+  box-shadow: 0 14px 30px rgba(16, 35, 77, 0.05);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.blog-post .post-body .bookmark-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--accent-rgb), 0.26);
+  box-shadow: 0 18px 36px rgba(16, 35, 77, 0.09);
+}
+
+.blog-post .post-body .bookmark-card__content {
+  display: grid;
+  gap: 0.38rem;
+  min-width: 0;
+}
+
+.blog-post .post-body .bookmark-card__label {
+  font-family: var(--ui-font);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.blog-post .post-body .bookmark-card__title {
+  font-family: var(--ui-font);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+.blog-post .post-body .bookmark-card__description {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.blog-post .post-body .bookmark-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: #4b5d76;
+  font-family: var(--ui-font);
+  font-size: 0.84rem;
+}
+
+.blog-post .post-body .bookmark-card__domain {
+  overflow-wrap: anywhere;
+}
+
+.blog-post .post-body .bookmark-card__arrow {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.blog-post .post-body .bookmark-card__media {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(var(--accent-rgb), 0.12);
+  background: var(--surface-alt);
+  aspect-ratio: 16 / 9;
+}
+
+.blog-post .post-body .bookmark-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .blog-post .post-body hr {
   margin: 1.4rem 0;
   border: 0;
@@ -1589,6 +1747,12 @@ a:hover {
     width: 4rem;
   }
 
+  .blog-post .post-body .callout,
+  .blog-post .post-body .bookmark-card {
+    padding: 0.9rem 0.95rem;
+    border-radius: 18px;
+  }
+
   .hero-card,
   .post-card,
   .info-card,
@@ -1697,6 +1861,10 @@ a:hover {
     justify-content: flex-start;
   }
 
+  .blog-post .post-body .bookmark-card--with-media {
+    grid-template-columns: 1fr;
+  }
+
   .blog-index__toolbar {
     justify-content: center;
   }
@@ -1708,6 +1876,17 @@ a:hover {
   .blog-index__filter-button {
     width: auto;
     justify-content: flex-start;
+  }
+}
+
+@media (min-width: 700px) {
+  .blog-post .post-body .bookmark-card--with-media {
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.95fr);
+    align-items: center;
+  }
+
+  .blog-post .post-body .bookmark-card--with-media .bookmark-card__media {
+    order: 2;
   }
 }
 

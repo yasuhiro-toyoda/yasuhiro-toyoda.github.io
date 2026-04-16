@@ -1,0 +1,42 @@
+{%- assign bookmark_url = include.url | strip -%}
+{%- assign bookmark_title = include.title | default: bookmark_url | strip -%}
+{%- assign bookmark_description = include.description | strip -%}
+{%- assign bookmark_label = include.label | strip -%}
+{%- assign bookmark_image = include.image | strip -%}
+{%- assign bookmark_image_alt = include.image_alt | default: bookmark_title | strip -%}
+{%- assign bookmark_domain = include.domain | strip -%}
+{%- if bookmark_domain == "" -%}
+  {%- if bookmark_url contains '://' -%}
+    {%- assign bookmark_domain = bookmark_url | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
+  {%- else -%}
+    {%- assign bookmark_domain = site.url | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign bookmark_classes = "bookmark-card" -%}
+{%- if bookmark_image != "" -%}
+  {%- assign bookmark_classes = bookmark_classes | append: " bookmark-card--with-media" -%}
+{%- endif -%}
+{%- if bookmark_url != "" -%}
+<div class="bookmark-card-wrap">
+  <a class="{{ bookmark_classes }}" href="{{ bookmark_url | escape }}"{% if bookmark_url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+    <span class="bookmark-card__content">
+      {%- if bookmark_label != "" -%}
+      <span class="bookmark-card__label">{{ bookmark_label }}</span>
+      {%- endif -%}
+      <span class="bookmark-card__title">{{ bookmark_title }}</span>
+      {%- if bookmark_description != "" -%}
+      <span class="bookmark-card__description">{{ bookmark_description }}</span>
+      {%- endif -%}
+      <span class="bookmark-card__meta">
+        <span class="bookmark-card__domain">{{ bookmark_domain }}</span>
+        <span class="bookmark-card__arrow" aria-hidden="true">↗</span>
+      </span>
+    </span>
+    {%- if bookmark_image != "" -%}
+    <span class="bookmark-card__media">
+      <img src="{{ bookmark_image | escape }}" alt="{{ bookmark_image_alt | escape }}" loading="lazy" />
+    </span>
+    {%- endif -%}
+  </a>
+</div>
+{%- endif -%}
