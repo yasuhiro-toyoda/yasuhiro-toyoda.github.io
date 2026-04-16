@@ -74,7 +74,7 @@ img {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.72rem 0;
 }
 
 .brand {
@@ -88,7 +88,7 @@ img {
 
 .brand-subtitle {
   margin: 0.2rem 0 0;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   color: var(--muted);
 }
 
@@ -112,7 +112,7 @@ img {
 
 .site-main {
   flex: 1;
-  padding: 2.5rem 0 4rem;
+  padding: 1.25rem 0 4rem;
 }
 
 .hero {
@@ -1226,7 +1226,7 @@ a:hover {
 }
 
 .site-header__inner {
-  gap: 1rem 1.6rem;
+  gap: 0.7rem 1.25rem;
 }
 
 .brand,
@@ -1255,7 +1255,7 @@ a:hover {
 }
 
 .brand {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
 }
 
 .brand-subtitle {
@@ -1293,7 +1293,7 @@ a:hover {
 }
 
 .site-main {
-  padding: 3rem 0 4.75rem;
+  padding: 1.6rem 0 4.75rem;
 }
 
 .page-header {
@@ -1572,7 +1572,7 @@ a:hover {
   }
 
   .site-main {
-    padding: 2.3rem 0 3.8rem;
+    padding: 1.05rem 0 3.8rem;
   }
 
   .site-nav {
@@ -1614,13 +1614,14 @@ a:hover {
 
 /* Restore classic header nav and blog filter controls */
 .site-nav {
-  gap: 0.9rem;
+  gap: 0.72rem;
   justify-content: flex-end;
 }
 
 .site-nav a {
+  font-size: 0.92rem;
   min-height: auto;
-  padding: 0.3rem 0;
+  padding: 0.18rem 0;
   border: none;
   border-radius: 0;
   background: transparent;
