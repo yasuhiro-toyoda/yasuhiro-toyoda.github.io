@@ -11,10 +11,14 @@ tags:
   - dev-memo
 excerpt: "GitHub Actions の yml は、いつ動かすか、どんな環境で動かすか、Secrets をどう渡すかを書くための設定ファイルです。"
 ---
-{% capture related_scraping %}
-スクレイピング全体の構成から見たい場合は、[GitHub Actionsを使った無料スクレイピング術]({{ '/blog/2026/04/16/GitHub-Actionsを使った無料スクレイピング術/' | relative_url }}) を先に読むと流れがつかみやすいです。
-{% endcapture %}
-{% include callout.html type="info" title="元記事はこちら" icon="🔗" content=related_scraping %}
+{% assign related_scraping_url = '/blog/2026/04/16/GitHub-Actionsを使った無料スクレイピング術/' | relative_url %}
+{% include bookmark-card.html
+  url=related_scraping_url
+  title="GitHub Actionsを使った無料スクレイピング術"
+  description="スクレイピング全体の構成から見たい場合は、こちらを先に読むと流れがつかみやすいです。"
+  label="元記事"
+  domain="Musashi Digital Studio"
+%}
 
 GitHub Actions の `workflow yml` は、見た目は短いですが役割がはっきりしています。
 
@@ -85,7 +89,7 @@ on:
 
 アクセス集中の時間帯は遅延したり、特に午前7時から11時ごろまでは実行されないこともあります。
 {% endcapture %}
-{% include callout.html type="warning" title="schedule の注意点" icon="⚠️" content=schedule_notice %}
+{% include callout.html type="warning" title="schedule の注意点" content=schedule_notice %}
 
 ## runs-on は実行環境を決める
 
@@ -189,7 +193,7 @@ Python 側では `os.environ["..."]` で受け取ります。
 - `runs-on` と `setup-python` で実行環境をそろえる
 - `env:` で Secrets を渡し、処理本体は Python に寄せる
 {% endcapture %}
-{% include callout.html type="tip" title="今回のポイント" icon="💡" content=yml_points %}
+{% include callout.html type="tip" title="今回のポイント" content=yml_points %}
 
 GitHub Actions の `workflow yml` は、見た目よりずっと役割が明確です。
 

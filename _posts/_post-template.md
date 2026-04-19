@@ -20,7 +20,7 @@ excerpt: ""
 - 箇条書きも使えます
 - Markdown も使えます
 {% endcapture %}
-{% include callout.html type="tip" title="補足メモ" icon="💡" content=callout_body %}
+{% include callout.html type="tip" title="補足メモ" content=callout_body %}
 
 ブックマークカード例:
 {% include bookmark-card.html
