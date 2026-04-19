@@ -11,10 +11,14 @@ tags:
   - dev-memo
 excerpt: "スクレイピング処理を main / fetch / normalize / csv / upload に分けておくと、壊れにくく直しやすい構成にできます。"
 ---
-{% capture related_yml %}
-`workflow yml` の書き方だけを知りたい場合は、[GitHub Actions の yml は何を書いているのか]({{ '/blog/2026/04/16/github-actions-yml/' | relative_url }}) を先に読むと流れを追いやすいです。
-{% endcapture %}
-{% include callout.html type="info" title="関連記事" icon="🧩" content=related_yml %}
+{% assign related_yml_url = '/blog/2026/04/16/github-actions-yml/' | relative_url %}
+{% include bookmark-card.html
+  url=related_yml_url
+  title="GitHub Actions の yml は何を書いているのか"
+  description="workflow yml の書き方だけを知りたい場合は、こちらを先に読むと流れを追いやすいです。"
+  label="関連記事"
+  domain="Musashi Digital Studio"
+%}
 
 Python でスクレイピングしたデータを CSV にまとめ、GitHub Actions で定期実行する構成を整理します。
 
@@ -213,7 +217,7 @@ CSV に関する判断をここに集めておくと、あとから Excel 向け
 - `main.py` は流れだけをまとめる
 - Secrets や実行タイミングの管理は GitHub Actions 側に寄せる
 {% endcapture %}
-{% include callout.html type="tip" title="今回のポイント" icon="💡" content=article_points %}
+{% include callout.html type="tip" title="今回のポイント" content=article_points %}
 
 GitHub Actions を使った無料スクレイピング環境は、構成さえシンプルにしておけばかなり扱いやすいです。
 

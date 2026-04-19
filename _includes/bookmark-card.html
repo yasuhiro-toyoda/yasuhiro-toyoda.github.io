@@ -5,8 +5,12 @@
 {%- assign bookmark_image = include.image | strip -%}
 {%- assign bookmark_image_alt = include.image_alt | default: bookmark_title | strip -%}
 {%- assign bookmark_domain = include.domain | strip -%}
+{%- assign bookmark_is_external = false -%}
+{%- if bookmark_url contains '://' -%}
+  {%- assign bookmark_is_external = true -%}
+{%- endif -%}
 {%- if bookmark_domain == "" -%}
-  {%- if bookmark_url contains '://' -%}
+  {%- if bookmark_is_external -%}
     {%- assign bookmark_domain = bookmark_url | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
   {%- else -%}
     {%- assign bookmark_domain = site.url | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
@@ -18,7 +22,7 @@
 {%- endif -%}
 {%- if bookmark_url != "" -%}
 <div class="bookmark-card-wrap">
-  <a class="{{ bookmark_classes }}" href="{{ bookmark_url | escape }}"{% if bookmark_url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+  <a class="{{ bookmark_classes }}" href="{{ bookmark_url | escape }}"{% if bookmark_is_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
     <span class="bookmark-card__content">
       {%- if bookmark_label != "" -%}
       <span class="bookmark-card__label">{{ bookmark_label }}</span>
@@ -29,7 +33,7 @@
       {%- endif -%}
       <span class="bookmark-card__meta">
         <span class="bookmark-card__domain">{{ bookmark_domain }}</span>
-        <span class="bookmark-card__arrow" aria-hidden="true">↗</span>
+        <span class="bookmark-card__arrow" aria-hidden="true">{% if bookmark_is_external %}↗{% else %}→{% endif %}</span>
       </span>
     </span>
     {%- if bookmark_image != "" -%}
