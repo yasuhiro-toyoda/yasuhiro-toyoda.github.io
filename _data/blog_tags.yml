@@ -20,3 +20,5 @@
   label: AI
 - slug: site-info
   label: サイト案内
+- slug: gitea
+  label: Gitea
