@@ -50,9 +50,11 @@ bundle exec jekyll serve
 
 ## 記事運用ルール
 
-- 記事は [`_posts`](/_posts) に Markdown で追加します。
-- ファイル名は `_posts/YYYY-MM-DD-slug.md` の形式にします。
-- 新規記事は [`_posts/_post-template.md`](/_posts/_post-template.md) をコピーして作成します。
+- 公開記事は [`_posts`](/_posts) 配下に Markdown で追加します。
+- 公開記事の配置は `_posts/YYYY/MM/YYYY-MM-DD-slug.md` の形式にします。
+- 下書きは `_drafts/slug.md` または `_drafts/YYYY/MM/slug.md` に置き、公開時に `_posts/YYYY/MM/YYYY-MM-DD-slug.md` へ移動します。
+- 新規記事は [`templates/post.md`](/templates/post.md) をコピーして作成します。
+- 新規記事では、ファイル名の日付と front matter の `date` を一致させます。
 - `title` `description` `date` `category` `tags` `excerpt` は必ず確認してから公開します。
 - 見出しは必要最小限にし、内容がすぐ分かるタイトルを付けます。
 - 公開記事として読まれる前提で、個人情報や機密情報は含めません。
@@ -74,7 +76,7 @@ bundle exec jekyll serve
 
 ## 更新メモ
 
-- 記事は [`_posts`](/_posts) に Markdown で追加します。
+- 記事は公開前なら [`_drafts`](/_drafts)、公開後は [`_posts`](/_posts) で管理します。
 - 固定ページは `index.html` や [`about/index.html`](/about/index.html) などの HTML ファイルで管理します。
 - ツモログの固定ページは [`apps/tsumolog/`](/apps/tsumolog/) 配下にあります。
 

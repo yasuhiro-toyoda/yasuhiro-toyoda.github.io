@@ -1,6 +1,4 @@
 ---
-# ブログ記事テンプレート
-# このファイルをコピーして、_posts/YYYY-MM-DD-slug.md として使ってください。
 layout: post
 title: "GitHub Actions から Google Drive に保存する方法（前半）"
 description: "2026-04-22-GitHub Actions から Google Drive に保存するために必要な４つの情報を取得する方法（前半）"
@@ -11,25 +9,6 @@ tags:
   - dev-memo
 excerpt: "2026-04-22-GitHub Actions から Google Drive に保存するために必要な情報の取得方法（前半）"
 ---
-
-{% comment %}
-コールアウト例:
-{% capture callout_body %}
-ここに補足を書きます。
-
-- 箇条書きも使えます
-- Markdown も使えます
-{% endcapture %}
-{% include callout.html type="tip" title="補足メモ" content=callout_body %}
-
-ブックマークカード例:
-{% include bookmark-card.html
-  url="https://example.com/"
-  title="参考リンクのタイトル"
-  description="記事内で紹介したい外部ページをカード風に表示できます。"
-  label="Reference"
-%}
-{% endcomment %}
 
 私はgithub actionsでwebスクレイピングをし、Google driveに保存しています。
 
@@ -88,11 +67,11 @@ excerpt: "2026-04-22-GitHub Actions から Google Drive に保存するために
 # **1.Google Cloud 側**
 
 ## **① プロジェクト作成**
-1.ブラウザで「google cloud」と検索するか、下記のURL``
+1. ブラウザで「google cloud」と検索するか、下記のURLからアクセス
 {% include bookmark-card.html
   url="https://cloud.google.com/"
   title="Google Cloud - The cron schedule expression generator"
   description="Google Cloudの公式サイト"
   label="Reference"
 %}
-![alt text](image.png)
+2. 

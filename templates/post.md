@@ -1,6 +1,6 @@
 ---
 # ブログ記事テンプレート
-# このファイルをコピーして、_posts/YYYY-MM-DD-slug.md として使ってください。
+# このファイルをコピーして、_posts/YYYY/MM/YYYY-MM-DD-slug.md として使ってください。
 layout: post
 title: ""
 description: ""
