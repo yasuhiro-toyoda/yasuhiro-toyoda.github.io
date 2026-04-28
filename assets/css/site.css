@@ -961,6 +961,18 @@ h6 {
   border-top: 1px solid var(--line);
 }
 
+.blog-post .post-body > p > img,
+.blog-post .post-body > img {
+  width: 90%;
+  max-width: 90%;
+  margin: 0.35rem auto 0;
+  padding: 0.35rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+}
+
 .post-body code {
   padding: 0.14rem 0.4rem;
   border: 1px solid rgba(148, 163, 184, 0.26);
