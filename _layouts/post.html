@@ -14,11 +14,7 @@ layout: default
       {% if page.excerpt %}
         <p class="post-lead">{{ page.excerpt }}</p>
       {% endif %}
-    </header>
-
-    <aside class="blog-post__rail" aria-label="記事情報">
-      <section class="blog-post__meta-card">
-        <p class="blog-post__rail-label">Article</p>
+      <div class="post-header__meta" role="group" aria-label="記事情報">
         <dl class="post-meta">
           <div class="post-meta__item">
             <dt class="post-meta__label">作成日</dt>
@@ -38,8 +34,10 @@ layout: default
           </div>
         </dl>
         {% include tag-list.html tags=page.tags link_to_blog=true %}
-      </section>
+      </div>
+    </header>
 
+    <aside class="blog-post__rail">
       <nav class="blog-post__footer" aria-label="おすすめのページ">
         <h2>おすすめのページ</h2>
         <ul class="blog-post__footer-links">
