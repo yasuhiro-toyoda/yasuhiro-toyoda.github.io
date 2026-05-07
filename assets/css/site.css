@@ -1,32 +1,32 @@
 :root {
-  --bg: #f3f7fb;
-  --bg-soft: #eef4fb;
-  --surface: rgba(255, 255, 255, 0.96);
-  --surface-soft: #f8fbff;
-  --surface-alt: #edf4ff;
-  --text: #1f2937;
-  --text-soft: #334155;
-  --heading: #0f172a;
-  --muted: #64748b;
-  --line: #dbe5f0;
-  --line-strong: #cad8e7;
-  --accent: #2563eb;
-  --accent-strong: #1d4ed8;
-  --accent-soft: #eaf2ff;
-  --accent-rgb: 37, 99, 235;
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --surface: #ffffff;
+  --surface-soft: #f7f8fa;
+  --surface-alt: #f1f4f7;
+  --text: #202833;
+  --text-soft: #3e4a59;
+  --heading: #111827;
+  --muted: #697386;
+  --line: transparent;
+  --line-strong: transparent;
+  --accent: #2f5f8f;
+  --accent-strong: #1f3d5a;
+  --accent-soft: #edf3f8;
+  --accent-rgb: 47, 95, 143;
   --success-rgb: 16, 185, 129;
   --warning-rgb: 217, 119, 6;
   --danger-rgb: 220, 38, 38;
   --max-width: 1120px;
   --content-width: 760px;
   --reading-width: 46rem;
-  --radius-card: 16px;
-  --radius-panel: 14px;
-  --radius-control: 12px;
-  --radius-code: 14px;
-  --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.05);
-  --shadow-card: 0 20px 44px rgba(15, 23, 42, 0.06);
-  --shadow-hover: 0 22px 46px rgba(15, 23, 42, 0.1);
+  --radius-card: 4px;
+  --radius-panel: 4px;
+  --radius-control: 3px;
+  --radius-code: 4px;
+  --shadow-soft: none;
+  --shadow-card: none;
+  --shadow-hover: none;
   --ui-font: "Inter", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", sans-serif;
   --body-font: "Noto Sans JP", "Inter", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", sans-serif;
   --article-font: "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
@@ -46,10 +46,7 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.11), transparent 28rem),
-    radial-gradient(circle at top right, rgba(var(--accent-rgb), 0.06), transparent 24rem),
-    linear-gradient(180deg, #f8fbff 0%, var(--bg) 34%, var(--bg-soft) 100%);
+  background: var(--bg);
   font-family: var(--body-font);
   font-size: 1rem;
   line-height: 1.8;
@@ -112,10 +109,10 @@ h6 {
   position: sticky;
   top: 0;
   z-index: 40;
-  border-bottom: 1px solid rgba(202, 216, 231, 0.85);
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.04);
+  border-bottom: none;
+  background: rgba(247, 248, 250, 0.97);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.08);
   transition: transform 0.24s ease, box-shadow 0.24s ease;
 }
 
@@ -206,7 +203,7 @@ h6 {
 .tag-filter-card,
 .blog-post__footer {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
 }
@@ -278,7 +275,7 @@ h6 {
 .section-heading {
   margin: 0 0 1.2rem;
   padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
   font-size: 1.2rem;
 }
 
@@ -307,15 +304,14 @@ h6 {
   display: grid;
   gap: 0.75rem;
   align-content: start;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
 }
 
 .post-card:hover,
 .category-card:hover,
 .info-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(var(--accent-rgb), 0.2);
-  box-shadow: var(--shadow-hover);
+  background: var(--surface-soft);
+  box-shadow: none;
 }
 
 .post-card h2,
@@ -411,36 +407,35 @@ h6 {
   justify-content: center;
   min-height: 2.9rem;
   padding: 0.76rem 1.16rem;
-  border: 1px solid transparent;
+  border: none;
   border-radius: var(--radius-control);
   font-family: var(--ui-font);
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
 .button {
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 52%, #3b82f6 100%);
+  background: var(--accent-strong);
   color: #ffffff;
-  box-shadow: 0 16px 30px rgba(var(--accent-rgb), 0.22);
+  box-shadow: none;
 }
 
 .button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 18px 32px rgba(var(--accent-rgb), 0.28);
+  background: var(--accent);
+  box-shadow: none;
 }
 
 .button-secondary {
   background: var(--surface);
   border-color: var(--line-strong);
   color: var(--accent-strong);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
 }
 
 .button-secondary:hover {
-  transform: translateY(-1px);
   border-color: rgba(var(--accent-rgb), 0.28);
   background: var(--accent-soft);
 }
@@ -484,7 +479,7 @@ h6 {
   align-items: center;
   min-height: 2rem;
   padding: 0.3rem 0.72rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   background: var(--accent-soft);
   color: var(--accent-strong);
   font-family: var(--ui-font);
@@ -510,7 +505,7 @@ h6 {
 .tag-filter-card__body {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--line);
+  border-top: none;
 }
 
 .tag-filter,
@@ -537,8 +532,8 @@ h6 {
   justify-content: center;
   min-height: 2rem;
   padding: 0.34rem 0.7rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
+  border: none;
+  border-radius: var(--radius-control);
   background: var(--surface-soft);
   color: var(--accent-strong);
   font-family: var(--ui-font);
@@ -546,7 +541,7 @@ h6 {
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
-  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
 }
 
 .tag-filter__button {
@@ -556,7 +551,6 @@ h6 {
 
 .tag-filter__button:hover,
 .tag-pill:hover {
-  transform: translateY(-1px);
   border-color: rgba(var(--accent-rgb), 0.24);
   background: var(--accent-soft);
 }
@@ -608,7 +602,7 @@ h6 {
   max-width: 100%;
   min-height: 3rem;
   padding: 0.74rem 1rem;
-  border: 1px solid var(--line-strong);
+  border: none;
   border-radius: var(--radius-control);
   background: var(--surface);
   box-shadow: var(--shadow-soft);
@@ -621,8 +615,8 @@ h6 {
 }
 
 .blog-index__filter[open] .blog-index__filter-button {
-  border-color: rgba(var(--accent-rgb), 0.26);
-  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+  background: var(--surface-soft);
+  box-shadow: none;
 }
 
 .blog-index__filter-current {
@@ -658,9 +652,9 @@ h6 {
   overflow: auto;
   padding: 1rem;
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: none;
   border-radius: var(--radius-panel);
-  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.14);
+  box-shadow: none;
   transform: translateX(-50%);
 }
 
@@ -700,7 +694,7 @@ h6 {
 .post-pagination__button {
   min-height: 2.8rem;
   padding: 0.7rem 1.05rem;
-  border: 1px solid var(--line-strong);
+  border: none;
   border-radius: var(--radius-control);
   background: var(--surface);
   color: var(--accent-strong);
@@ -714,8 +708,6 @@ h6 {
 }
 
 .post-pagination__button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: rgba(var(--accent-rgb), 0.28);
   background: var(--accent-soft);
 }
 
@@ -769,7 +761,7 @@ h6 {
 
 .post-header {
   padding: 1.4rem 0 1.75rem;
-  border-bottom: 1px solid var(--line-strong);
+  border-bottom: none;
 }
 
 .post-header h1 {
@@ -791,7 +783,8 @@ h6 {
 }
 
 .blog-post__footer {
-  padding: 1.2rem;
+  padding: 1rem;
+  background: var(--surface-soft);
 }
 
 .post-header__meta {
@@ -844,28 +837,29 @@ h6 {
 .post-header__meta .tag-pill {
   min-height: 1.65rem;
   padding: 0.22rem 0.52rem;
-  border-color: rgba(148, 163, 184, 0.34);
-  background: rgba(248, 251, 255, 0.68);
+  border-color: var(--line-strong);
+  background: var(--surface);
   color: var(--muted);
   font-size: 0.7rem;
   font-weight: 600;
 }
 
 .post-header__meta .tag-pill:hover {
-  transform: none;
-  border-color: rgba(var(--accent-rgb), 0.22);
-  background: rgba(var(--accent-rgb), 0.06);
+  background: var(--accent-soft);
   color: var(--accent-strong);
 }
 
 .blog-post__footer h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1rem;
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .blog-post__footer-links {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.42rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -876,11 +870,17 @@ h6 {
 }
 
 .blog-post__footer-links a {
+  display: block;
+  padding: 0.62rem 0.7rem;
+  border-radius: var(--radius-control);
+  background: var(--surface);
   color: var(--heading);
   text-decoration: none;
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
 .blog-post__footer-links a:hover {
+  background: var(--accent-soft);
   color: var(--accent-strong);
 }
 
@@ -944,9 +944,9 @@ h6 {
 
 .blog-post .post-body h2 {
   margin: 4rem 0 1.3rem;
-  padding: 1.05rem 0 0.9rem;
-  border-top: 2px solid var(--heading);
-  border-bottom: 1px solid var(--line-strong);
+  padding: 0;
+  border-top: none;
+  border-bottom: none;
   font-family: var(--article-heading-font);
   font-size: clamp(1.35rem, 2.1vw, 1.75rem);
   font-weight: 800;
@@ -961,8 +961,8 @@ h6 {
 
 .blog-post .post-body h3 {
   margin: 2.45rem 0 0.9rem;
-  padding-left: 0.85rem;
-  border-left: 4px solid var(--heading);
+  padding-left: 0;
+  border-left: none;
   font-family: var(--article-heading-font);
   font-size: 1.18rem;
   font-weight: 800;
@@ -985,9 +985,9 @@ h6 {
 }
 
 .blog-post .post-body blockquote {
-  padding: 0.1rem 0 0.1rem 1.15rem;
-  border-left: 3px solid var(--heading);
-  background: transparent;
+  padding: 1rem 1.1rem;
+  border-left: none;
+  background: var(--surface-soft);
   color: var(--text-soft);
 }
 
@@ -997,14 +997,13 @@ h6 {
 
 .blog-post .post-body hr {
   border: 0;
-  border-top: 1px solid var(--line);
 }
 
 .blog-post .post-body details {
   padding: 0.95rem 1rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  background: #fff;
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--surface-soft);
 }
 
 .blog-post .post-body summary {
@@ -1017,8 +1016,8 @@ h6 {
 
 .blog-post .post-body details[open] summary {
   margin-bottom: 0.8rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid var(--line);
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .blog-post .post-body > p > img,
@@ -1027,18 +1026,18 @@ h6 {
   max-width: 100%;
   margin: 0.6rem auto 0;
   padding: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
+  border: none;
+  border-radius: var(--radius-card);
   background: #fff;
   box-shadow: none;
 }
 
 .post-body code {
   padding: 0.14rem 0.4rem;
-  border: 1px solid rgba(148, 163, 184, 0.26);
-  border-radius: 0.45rem;
-  background: #f1f5f9;
-  color: #1e3a8a;
+  border: none;
+  border-radius: var(--radius-control);
+  background: var(--surface-alt);
+  color: var(--accent-strong);
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
   font-size: 0.92em;
   line-height: 1.4;
@@ -1049,8 +1048,8 @@ h6 {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding: 1rem 1.1rem;
-  border: 1px solid rgba(96, 165, 250, 0.16);
-  border-radius: 8px;
+  border: none;
+  border-radius: var(--radius-code);
   background: #111827;
   color: #e2e8f0;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
@@ -1069,7 +1068,7 @@ h6 {
 .post-body .highlight {
   max-width: 100%;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius-code);
 }
 
 .post-body .highlight pre {
@@ -1111,7 +1110,7 @@ h6 {
 .blog-post .post-body td {
   min-width: 0;
   padding: 0.76rem 0.84rem;
-  border: 1px solid var(--line-strong);
+  border: none;
   text-align: left;
   vertical-align: top;
   overflow-wrap: anywhere;
@@ -1133,15 +1132,15 @@ h6 {
 .callout {
   --callout-rgb: var(--accent-rgb);
   padding: 1rem 1.05rem 1.05rem;
-  border: 1px solid rgba(var(--callout-rgb), 0.18);
-  border-left: 4px solid rgba(var(--callout-rgb), 0.48);
+  border: none;
+  border-left: none;
   border-radius: var(--radius-card);
-  background: linear-gradient(135deg, rgba(var(--callout-rgb), 0.09), rgba(var(--callout-rgb), 0.025));
+  background: var(--surface-soft);
 }
 
 .blog-post .post-body .callout {
-  border-radius: 8px;
-  background: #fff;
+  border-radius: var(--radius-card);
+  background: var(--surface-soft);
 }
 
 .callout--note,
@@ -1184,19 +1183,18 @@ h6 {
   gap: 1rem;
   margin: 0;
   padding: 1rem;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: none;
+  border-radius: var(--radius-card);
   background: #fff;
   box-shadow: var(--shadow-soft);
   color: var(--heading);
   text-decoration: none;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
 }
 
 .bookmark-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(var(--accent-rgb), 0.24);
-  box-shadow: 0 20px 38px rgba(15, 23, 42, 0.1);
+  background: var(--surface-soft);
+  box-shadow: none;
 }
 
 .bookmark-card__content {
@@ -1249,8 +1247,8 @@ h6 {
 
 .bookmark-card__media {
   overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  border: none;
   background: var(--surface-soft);
   aspect-ratio: 16 / 9;
 }
@@ -1277,7 +1275,7 @@ h6 {
 .about-section {
   margin-top: 1.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
+  border-top: none;
 }
 
 .about-list {
@@ -1314,7 +1312,7 @@ h6 {
 .app-detail-page__header {
   margin-bottom: 0;
   padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
 }
 
 .app-detail-page__header .muted {
@@ -1328,7 +1326,7 @@ h6 {
 
 .app-stream__section {
   padding: 1.4rem 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: none;
 }
 
 .app-stream__section:first-child {
@@ -1374,9 +1372,10 @@ h6 {
 }
 
 .site-footer {
-  border-top: 1px solid rgba(202, 216, 231, 0.85);
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
+  border-top: none;
+  background: var(--surface-soft);
+  backdrop-filter: none;
+  box-shadow: inset 0 1px 0 rgba(17, 24, 39, 0.08);
 }
 
 .footer-grid {
@@ -1414,7 +1413,7 @@ h6 {
 
 .footer-bottom {
   padding: 1rem 0 1.4rem;
-  border-top: 1px solid var(--line);
+  border-top: none;
   font-size: 0.9rem;
 }
 
@@ -1491,7 +1490,7 @@ h6 {
   .info-card,
   .tag-filter-card,
   .blog-post__footer {
-    border-radius: 14px;
+    border-radius: var(--radius-card);
   }
 
   .hero-card,
