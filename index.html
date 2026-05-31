@@ -22,10 +22,17 @@ description: Musashi Digital Studio のトップページです。個人開発�
   <h2 class="section-heading">最新記事</h2>
   <div class="grid grid-3">
     {% for post in site.posts limit:3 %}
-      <article class="post-card">
-        <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      {% assign post_thumbnail = post.thumbnail | default: '/assets/images/blog/default-thumbnail.svg' %}
+      {% assign post_thumbnail_alt = post.thumbnail_alt | default: post.title %}
+      <article class="post-card home-card">
+        <a class="post-card__media" href="{{ post.url | relative_url }}" aria-label="{{ post.title | escape }}">
+          <img class="post-card__thumbnail" src="{{ post_thumbnail | relative_url }}" alt="{{ post_thumbnail_alt | escape }}" loading="lazy" decoding="async">
+        </a>
+        <div class="post-card__content">
+          <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        </div>
       </article>
     {% endfor %}
   </div>
@@ -34,17 +41,32 @@ description: Musashi Digital Studio のトップページです。個人開発�
 <section class="wrap section">
   <h2 class="section-heading">主なカテゴリ</h2>
   <div class="grid grid-3">
-    <article class="category-card post-card">
-      <h3>アプリ開発</h3>
-      <p>開発中のアプリについて、進捗や機能追加、UI改善、リリース準備、更新情報などをまとめています。</p>
+    <article class="category-card post-card home-card">
+      <div class="category-card__media category-card__media--app" aria-hidden="true">
+        <span>App</span>
+      </div>
+      <div class="post-card__content">
+        <h3>アプリ開発</h3>
+        <p>開発中のアプリについて、進捗や機能追加、UI改善、リリース準備、更新情報などをまとめています。</p>
+      </div>
     </article>
-    <article class="category-card post-card">
-      <h3>開発メモ</h3>
-      <p>実装や設定の過程で得た知見を整理したメモです。Expo、React Native、SQLite、GitHub Pages、Firebase、App Store Connect などに関する内容を扱います。</p>
+    <article class="category-card post-card home-card">
+      <div class="category-card__media category-card__media--memo" aria-hidden="true">
+        <span>Memo</span>
+      </div>
+      <div class="post-card__content">
+        <h3>開発メモ</h3>
+        <p>実装や設定の過程で得た知見を整理したメモです。Expo、React Native、SQLite、GitHub Pages、Firebase、App Store Connect などに関する内容を扱います。</p>
+      </div>
     </article>
-    <article class="category-card post-card">
-      <h3>個人開発の進め方</h3>
-      <p>個人で開発を続けるための考え方や進め方をまとめています。調べ方、AIの活用、本業との両立、時間配分、学習や制作の進め方などを扱います。</p>
+    <article class="category-card post-card home-card">
+      <div class="category-card__media category-card__media--workflow" aria-hidden="true">
+        <span>Flow</span>
+      </div>
+      <div class="post-card__content">
+        <h3>個人開発の進め方</h3>
+        <p>個人で開発を続けるための考え方や進め方をまとめています。調べ方、AIの活用、本業との両立、時間配分、学習や制作の進め方などを扱います。</p>
+      </div>
     </article>
   </div>
 </section>

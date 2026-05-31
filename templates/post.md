@@ -9,18 +9,39 @@ updated_at:
 category: 開発
 tags:
   - dev-memo
+thumbnail:
+thumbnail_alt:
 excerpt: ""
 ---
 
 {% comment %}
-コールアウト例:
-{% capture callout_body %}
-ここに補足を書きます。
+サムネイル例:
+thumbnail: /assets/images/blog/2026-12-31-sample-post/thumbnail.png
+thumbnail_alt: Gitの基本コマンドを説明するイメージ
 
-- 箇条書きも使えます
-- Markdown も使えます
-{% endcapture %}
-{% include callout.html type="tip" title="補足メモ" content=callout_body %}
+画像配置:
+assets/images/blog/YYYY-MM-DD-short-slug/thumbnail.png
+
+強調枠例:
+> **備考**
+>
+> ここに補足情報を書きます。
+{: .callout .callout--note }
+
+> **推奨**
+>
+> ここにおすすめの対応を書きます。
+{: .callout .callout--tip }
+
+> **注意**
+>
+> ここに注意点を書きます。
+{: .callout .callout--caution }
+
+> **警告**
+>
+> ここに重要な警告を書きます。
+{: .callout .callout--warning }
 
 ブックマークカード例:
 {% include bookmark-card.html

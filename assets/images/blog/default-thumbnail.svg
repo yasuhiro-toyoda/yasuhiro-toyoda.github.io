@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Musashi Digital Studio Blog</title>
+  <desc id="desc">Default blog thumbnail for Musashi Digital Studio.</desc>
+  <rect width="1200" height="675" fill="#f4f7fb"/>
+  <rect x="72" y="72" width="1056" height="531" rx="18" fill="#ffffff"/>
+  <path d="M72 241h1056" stroke="#d9e3ef" stroke-width="4"/>
+  <circle cx="128" cy="140" r="16" fill="#2f5f8f"/>
+  <circle cx="180" cy="140" r="16" fill="#22c55e"/>
+  <circle cx="232" cy="140" r="16" fill="#f59e0b"/>
+  <path d="M165 364h408" stroke="#1f3d5a" stroke-width="34" stroke-linecap="round"/>
+  <path d="M165 435h610" stroke="#8aa4bd" stroke-width="26" stroke-linecap="round"/>
+  <path d="M165 494h454" stroke="#c4d2df" stroke-width="22" stroke-linecap="round"/>
+  <rect x="830" y="318" width="190" height="190" rx="22" fill="#edf3f8"/>
+  <path d="M873 433l43-49 38 34 30-37 30 52" fill="none" stroke="#2f5f8f" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="966" cy="367" r="18" fill="#22c55e"/>
+  <text x="165" y="206" fill="#1f3d5a" font-family="Inter, 'Noto Sans JP', Arial, sans-serif" font-size="42" font-weight="800">Musashi Digital Studio</text>
+</svg>

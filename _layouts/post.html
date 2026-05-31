@@ -7,6 +7,7 @@ layout: default
   {% assign updated_at = page.updated_at %}
   {% assign updated_at_key = page.updated_at | date: "%Y-%m-%d %H:%M:%S %z" %}
   {% assign display_title = page.title_display | default: page.title %}
+  {% assign thumbnail_alt = page.thumbnail_alt | default: display_title %}
   <div class="blog-post__grid">
     <header class="post-header blog-post__header">
       <p class="eyebrow">{{ page.category }}</p>
@@ -35,7 +36,16 @@ layout: default
         </dl>
         {% include tag-list.html tags=page.tags link_to_blog=true %}
       </div>
+      {% if page.thumbnail %}
+        <figure class="post-hero-media">
+          <img src="{{ page.thumbnail | relative_url }}" alt="{{ thumbnail_alt | escape }}" loading="eager" decoding="async">
+        </figure>
+      {% endif %}
     </header>
+
+    <div class="post-body blog-post__body article-content">
+      {{ content }}
+    </div>
 
     <aside class="blog-post__rail">
       <nav class="blog-post__footer" aria-label="おすすめのページ">
@@ -47,9 +57,5 @@ layout: default
         </ul>
       </nav>
     </aside>
-
-    <div class="post-body blog-post__body">
-      {{ content }}
-    </div>
   </div>
 </article>

@@ -64,11 +64,20 @@ description: Musashi Digital Studio の記事一覧です。個人開発の作�
     <div class="grid grid-2" data-post-grid>
       {% for post in site.posts %}
         {% assign post_tags = post.tags | default: empty %}
+        {% assign post_thumbnail = post.thumbnail | default: '/assets/images/blog/default-thumbnail.svg' %}
+        {% assign post_thumbnail_alt = post.thumbnail_alt | default: post.title %}
         <article class="post-card" data-post-card data-category="{{ post.category | escape }}" data-tags="{{ post_tags | join: ',' | escape }}"{% if forloop.index > posts_per_page %} hidden{% endif %}>
-          <p class="meta">{{ post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
-          <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-          <p>{{ post.excerpt | strip_html | truncate: 160 }}</p>
-          {% include tag-list.html tags=post_tags link_to_blog=true %}
+          <a class="post-card__media" href="{{ post.url | relative_url }}" aria-label="{{ post.title | escape }}">
+            <img class="post-card__thumbnail" src="{{ post_thumbnail | relative_url }}" alt="{{ post_thumbnail_alt | escape }}" loading="lazy" decoding="async">
+          </a>
+          <div class="post-card__content">
+            <p class="post-card__meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%-m月%-d日" }}</time>
+              <span class="post-card__category">{{ post.category }}</span>
+            </p>
+            <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+            {% include tag-list.html tags=post_tags link_to_blog=true %}
+          </div>
         </article>
       {% endfor %}
     </div>

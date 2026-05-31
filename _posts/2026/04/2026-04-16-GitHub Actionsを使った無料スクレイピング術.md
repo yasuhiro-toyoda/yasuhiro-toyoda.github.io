@@ -9,6 +9,8 @@ tags:
   - workflow
   - beginner
   - dev-memo
+thumbnail: /assets/images/blog/2026-04-16-github-actions-scraping/thumbnail.png
+thumbnail_alt: ブランチ図とリポジトリでGitHub Actionsの自動化を表すイメージ
 excerpt: "スクレイピング処理を main / fetch / normalize / csv / upload に分けておくと、壊れにくく直しやすい構成にできます。"
 ---
 {% assign related_yml_url = '/blog/2026/04/16/github-actions-yml/' | relative_url %}
