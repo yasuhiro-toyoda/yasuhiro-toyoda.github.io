@@ -17,6 +17,17 @@ kramdown:
   input: GFM
 permalink: /blog/:year/:month/:day/:title/
 future: false
+exclude:
+  - AGENTS.md
+  - README.md
+  - docs
+  - scripts
+  - tests
+  - requirements-ci.txt
+  - templates
+  - Gemfile
+  - Gemfile.lock
+  - vendor
 plugins:
   - jekyll-feed
 defaults:

@@ -7,3 +7,4 @@
 /vendor/bundle/
 /jekyll-serve.log
 /jekyll-serve.err.log
+__pycache__/
