@@ -1,0 +1,65 @@
+name: Publish checks
+
+on:
+  pull_request:
+    branches: [main, dev]
+    types: [opened, synchronize, reopened, ready_for_review, edited]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  source:
+    name: Publication source
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require same-repository dev for main
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          HEAD_BRANCH: ${{ github.head_ref }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          BASE_REPOSITORY: ${{ github.repository }}
+        run: |
+          if [ "$BASE_BRANCH" = "main" ]; then
+            if [ "$HEAD_BRANCH" != "dev" ] || [ "$HEAD_REPOSITORY" != "$BASE_REPOSITORY" ]; then
+              echo "::error::main accepts pull requests only from dev in the same repository."
+              exit 1
+            fi
+          fi
+          echo "Publication source accepted."
+
+  build:
+    name: Jekyll build and content
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install content-check dependency
+        run: python3 -m pip install -r requirements-ci.txt
+      - name: Test content checker
+        run: python3 -m unittest discover -s tests -v
+      - name: Check content in the PR merge result
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python3 scripts/check_content.py --base "$BASE_SHA"
+      - uses: ruby/setup-ruby@14594264cd68ce8a2345dd349bc3d138a4ef85c8 # v1
+        with:
+          ruby-version: '3.3'
+          bundler: '2.6.9'
+      - name: Install Jekyll dependencies
+        run: |
+          bundle lock --add-platform x86_64-linux
+          bundle install
+      - name: Build site
+        env:
+          JEKYLL_ENV: production
+          TZ: Asia/Tokyo
+        run: bundle exec jekyll build --trace
