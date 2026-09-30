@@ -7,8 +7,8 @@ category: 開発
 tags:
   - workflow
   - dev-memo
-thumbnail: /assets/images/blog/2026-09-29-github-main-protection/thumbnail.jpg
-thumbnail_alt: "1人でもmainを守る。Gitのブランチと盾を描いたmainブランチ保護設定のイメージ"
+thumbnail: /assets/images/blog/2026-09-29-github-main-protection/thumbnail.png
+thumbnail_alt: "GitHubのmain保護設定。ノートパソコンとチェックリストを確認する人物のイラスト"
 excerpt: "1人で運営するブログでもmainを保護。PR承認0人と必須チェックを使い、devからmainへ反映するための設定手順を紹介します。"
 ---
 

@@ -22,3 +22,5 @@
   label: サイト案内
 - slug: gitea
   label: Gitea
+- slug: git
+  label: Git

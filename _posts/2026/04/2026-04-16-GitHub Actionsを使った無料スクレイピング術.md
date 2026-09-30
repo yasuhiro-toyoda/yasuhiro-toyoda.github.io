@@ -10,7 +10,7 @@ tags:
   - beginner
   - dev-memo
 thumbnail: /assets/images/blog/2026-04-16-github-actions-scraping/thumbnail.png
-thumbnail_alt: ブランチ図とリポジトリでGitHub Actionsの自動化を表すイメージ
+thumbnail_alt: "GitHub Actionsでスクレイピング。取得した情報のカードを整理して保存する手元のイラスト"
 excerpt: "スクレイピング処理を main / fetch / normalize / csv / upload に分けておくと、壊れにくく直しやすい構成にできます。"
 ---
 {% assign related_yml_url = '/blog/2026/04/16/github-actions-yml/' | relative_url %}

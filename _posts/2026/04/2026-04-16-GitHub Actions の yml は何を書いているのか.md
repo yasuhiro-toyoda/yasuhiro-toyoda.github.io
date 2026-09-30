@@ -9,8 +9,8 @@ tags:
   - workflow
   - beginner
   - dev-memo
-thumbnail: /assets/images/blog/2026-04-17-github-actions-yml/thumbnail.png
-thumbnail_alt: ブランチ図とリポジトリでGitHub Actionsのworkflow ymlを表すイメージ
+thumbnail: /assets/images/blog/2026-04-16-github-actions-yml/thumbnail.png
+thumbnail_alt: "GitHub Actionsのymlの読み方。設定を読む人物と時計・鍵を描いたイラスト"
 excerpt: "GitHub Actions の yml は、いつ動かすか、どんな環境で動かすか、Secrets をどう渡すかを書くための設定ファイルです。"
 ---
 {% assign related_scraping_url = '/blog/2026/04/16/GitHub-Actionsを使った無料スクレイピング術/' | relative_url %}
