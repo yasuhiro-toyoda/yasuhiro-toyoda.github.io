@@ -28,6 +28,7 @@ GitHub Actions の `workflow yml` は、見た目は短いですが役割がは�
 
 ## 今回見る yml
 
+{% raw %}
 ```yaml
 name: Scheduled Scraper
 
@@ -58,6 +59,7 @@ jobs:
           GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
         run: python main.py
 ```
+{% endraw %}
 
 見た目は短いですが、それぞれ意味があります。
 
@@ -89,7 +91,7 @@ on:
 {% capture schedule_notice %}
 定期実行は、設定した時刻どおりに毎回ぴったり動くとは限りません。
 
-アクセス集中の時間帯は遅延したり、特に午前7時から11時ごろまでは実行されないこともあります。
+GitHub Actionsの負荷が高い時間帯、特に毎時0分付近では、実行が遅れることがあります。負荷が十分に高い場合は、待機中のジョブが破棄される場合もあります。毎時0分を避けた時刻にすることも対策の1つです。[GitHub公式のscheduleの注意点](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)も確認してください。
 {% endcapture %}
 {% include callout.html type="warning" title="schedule の注意点" content=schedule_notice %}
 
@@ -146,6 +148,7 @@ Python のスクレイピング用途なら、まずはこれで十分です。
 
 ## env: で Secrets を Python に渡す
 
+{% raw %}
 ```yaml
 env:
   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -153,6 +156,7 @@ env:
   GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
   GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
 ```
+{% endraw %}
 
 ここはかなり大事です。
 
