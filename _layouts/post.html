@@ -10,29 +10,29 @@ layout: default
   {% assign thumbnail_alt = page.thumbnail_alt | default: display_title %}
   <div class="blog-post__grid">
     <header class="post-header blog-post__header">
-      <p class="eyebrow">{{ page.category }}</p>
       <h1>{{ display_title }}</h1>
-      {% if page.excerpt %}
-        <p class="post-lead">{{ page.excerpt }}</p>
-      {% endif %}
       <div class="post-header__meta" role="group" aria-label="記事情報">
         <dl class="post-meta">
           <div class="post-meta__item">
-            <dt class="post-meta__label">作成日</dt>
+            <dt class="post-meta__label">公開日</dt>
             <dd class="post-meta__value">
               <time datetime="{{ created_at | date_to_xmlschema }}">{{ created_at | date: "%Y年%-m月%-d日" }}</time>
             </dd>
           </div>
-          <div class="post-meta__item">
-            <dt class="post-meta__label">更新日</dt>
-            <dd class="post-meta__value">
-              {% if updated_at and updated_at_key != created_at_key %}
+          {% if updated_at and updated_at_key != created_at_key %}
+            <div class="post-meta__item">
+              <dt class="post-meta__label">更新日</dt>
+              <dd class="post-meta__value">
                 <time datetime="{{ updated_at | date_to_xmlschema }}">{{ updated_at | date: "%Y年%-m月%-d日" }}</time>
-              {% else %}
-                <span>作成日と同じ</span>
-              {% endif %}
-            </dd>
-          </div>
+              </dd>
+            </div>
+          {% endif %}
+          {% if page.category %}
+            <div class="post-meta__item">
+              <dt class="post-meta__label">カテゴリ</dt>
+              <dd class="post-meta__value"><a href="{{ '/blog/' | relative_url }}?category={{ page.category | uri_escape }}">{{ page.category | escape }}</a></dd>
+            </div>
+          {% endif %}
         </dl>
         {% include tag-list.html tags=page.tags link_to_blog=true %}
       </div>
@@ -44,18 +44,14 @@ layout: default
     </header>
 
     <div class="post-body blog-post__body article-content">
-      {{ content }}
+      {% include post-content.html html=content %}
     </div>
 
-    <aside class="blog-post__rail">
-      <nav class="blog-post__footer" aria-label="おすすめのページ">
-        <h2>おすすめのページ</h2>
-        <ul class="blog-post__footer-links">
-          <li><a href="{{ '/blog/' | relative_url }}">記事一覧</a></li>
-          <li><a href="{{ '/apps/' | relative_url }}">アプリ一覧</a></li>
-          <li><a href="{{ '/contact/' | relative_url }}">お問い合わせ</a></li>
-        </ul>
+    <footer class="blog-post__footer">
+      {% include related-posts.html %}
+      <nav class="post-back" aria-label="記事一覧へのリンク">
+        <a href="{{ '/blog/' | relative_url }}">ブログ一覧へ戻る</a>
       </nav>
-    </aside>
+    </footer>
   </div>
 </article>

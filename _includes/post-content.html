@@ -1,0 +1,48 @@
+{%- comment -%}
+  Kramdown renders headings with IDs before the layout runs. Use that HTML to
+  build a static TOC without a plugin, JavaScript, or per-post front matter.
+  Body H1s become H2s; an opening heading repeating the title is redundant.
+{%- endcomment -%}
+{%- assign article_html = include.html | replace: '<h1', '<h2' | replace: '</h1>', '</h2>' | strip -%}
+{%- assign opening_tag = article_html | split: '>' | first -%}
+{%- if opening_tag contains '<h2 ' -%}
+  {%- assign opening_heading = article_html | split: '</h2>' | first | append: '</h2>' -%}
+  {%- assign opening_label = opening_heading | strip_html | strip -%}
+  {%- if opening_label == page.title or opening_label == display_title or opening_label == 'はじめに' or opening_label == 'この記事で伝えたいこと' or opening_label == 'この記事を読んでわかること' -%}
+    {%- assign article_html = article_html | remove_first: opening_heading | strip -%}
+  {%- else -%}
+    {%- comment -%}Reuse an existing opening paragraph when a legacy post starts with a section heading.{%- endcomment -%}
+    {%- assign after_heading = article_html | remove_first: opening_heading | strip -%}
+    {%- assign paragraph_start = after_heading | slice: 0, 3 -%}
+    {%- if paragraph_start == '<p>' -%}
+      {%- assign opening_paragraph = after_heading | split: '</p>' | first | append: '</p>' -%}
+      {%- assign remaining_html = article_html | remove_first: opening_paragraph -%}
+      {%- assign article_html = opening_paragraph | append: remaining_html -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+{%- assign sections = article_html | split: '<h2 ' -%}
+{%- assign heading_count = sections.size | minus: 1 -%}
+{%- assign introduction = sections.first | strip -%}
+{%- if introduction != '' -%}
+  <div class="post-intro">{{ introduction }}</div>
+{%- endif -%}
+{%- if heading_count >= 3 -%}
+  <details class="post-toc">
+    <summary>目次</summary>
+    <nav aria-label="この記事の目次">
+      <ol>
+        {%- for section in sections offset: 1 -%}
+          {%- assign heading_markup = section | split: '</h2>' | first -%}
+          {%- assign heading_id = heading_markup | split: 'id="' | last | split: '"' | first -%}
+          {%- capture heading_html -%}<h2 {{ heading_markup }}</h2>{%- endcapture -%}
+          {%- assign heading_label = heading_html | replace: '<br />', ' ' | replace: '<br>', ' ' | strip_html | normalize_whitespace | strip -%}
+          <li><a href="#{{ heading_id | escape_once }}">{{ heading_label | escape_once }}</a></li>
+        {%- endfor -%}
+      </ol>
+    </nav>
+  </details>
+{%- endif -%}
+{%- for section in sections offset: 1 -%}
+  <h2 {{ section }}
+{%- endfor -%}
