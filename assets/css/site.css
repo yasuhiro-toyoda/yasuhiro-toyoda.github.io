@@ -933,6 +933,7 @@ h6 {
   align-items: baseline;
   gap: 0.36rem;
   margin: 0;
+  white-space: nowrap;
 }
 
 .post-meta__label,
