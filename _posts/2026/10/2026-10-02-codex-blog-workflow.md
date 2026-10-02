@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2026-10-02 09:00:00 +0900
 title: "Codexでブログ更新を進める｜記事案から公開までの流れ"
 description: "GitHubで管理するJekyllブログを、ChatGPTとCodexを使って更新する流れを紹介します。記事案・原稿・サムネイル・PR・公開前後の確認を整理します。"
 category: 開発
@@ -7,17 +8,10 @@ tags:
   - workflow
   - dev-memo
   - AI
-thumbnail: /assets/images/blog/codex-blog-workflow/thumbnail.png
+thumbnail: /assets/images/blog/2026-10-02-codex-blog-workflow/thumbnail.png
 thumbnail_alt: "Codexでブログ更新。原稿と画像を準備し、ノートパソコンで変更を確認するイラスト"
 excerpt: "記事案から原稿と画像の準備、検査、PR、公開確認まで。AIに依頼する作業と、自分で決める・確認することを、このブログの運用に沿ってまとめます。"
-published: false
 ---
-
-{% comment %}
-公開前の準備：本文確認後、実際の公開日時に合わせてdateと記事ファイル名を設定する。
-サムネイルの保存先を公開日のディレクトリへ変更し、thumbnailを更新する。
-published: falseは公開が決まった時点で解除する。
-{% endcomment %}
 
 先日、GitHubで1人運営しているこのブログに、mainブランチの保護設定を入れました。作業用の`dev`からPRを作り、検査に成功してから公開用の`main`へ反映する、という設定です。
 

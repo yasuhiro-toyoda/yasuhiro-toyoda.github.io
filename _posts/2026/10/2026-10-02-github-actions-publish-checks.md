@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2026-10-02 09:00:00 +0900
 title: "GitHub Actionsでブログ公開前のチェックを作る"
 description: "1人で運営するJekyllブログに、公開元ブランチ・記事情報・サムネイル・ビルドの検査を追加。実際のGitHub Actions設定と、PRで失敗したときの確認方法を紹介します。"
 category: 開発
@@ -7,15 +8,9 @@ tags:
   - workflow
   - dev-memo
 excerpt: "devからmainへ公開する前に、記事の日付や画像の指定ミスをPRで確認。実際に使っている2つの必須チェックと、失敗時の直し方をまとめます。"
-published: false
+thumbnail: /assets/images/blog/2026-10-02-github-actions-publish-checks/thumbnail.png
+thumbnail_alt: "GitHub Actionsで公開前チェック。ノートパソコンとチェックリストで記事・画像・ビルドを確認するイラスト"
 ---
-
-{% comment %}
-公開前の準備：本文確認後、実際の公開日時に合わせてdateとファイル名を設定する。
-アイキャッチを配置し、thumbnailとthumbnail_altを追加する。
-published: falseは公開が決まった時点で解除する。
-コードは2026年10月1日時点のmainを参照。公開前に実際の設定との差分を再確認する。
-{% endcomment %}
 
 このブログは、GitHubとJekyllを使って1人で運営しています。記事や画像の変更は作業用の`dev`に集め、公開するときに`main`へ反映する流れです。
 
