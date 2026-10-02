@@ -71,11 +71,14 @@ description: Musashi Digital Studio の記事一覧です。個人開発の作�
             <img class="post-card__thumbnail" src="{{ post_thumbnail | relative_url }}" alt="{{ post_thumbnail_alt | escape }}" loading="lazy" decoding="async">
           </a>
           <div class="post-card__content">
+            <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+            {% if post.excerpt %}
+              <p class="post-card__excerpt">{{ post.excerpt | strip_html | strip | escape_once }}</p>
+            {% endif %}
             <p class="post-card__meta">
               <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%-m月%-d日" }}</time>
               <span class="post-card__category">{{ post.category }}</span>
             </p>
-            <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
             {% include tag-list.html tags=post_tags link_to_blog=true %}
           </div>
         </article>

@@ -58,8 +58,12 @@ jobs:
         run: |
           bundle lock --add-platform x86_64-linux
           bundle install
+      - name: Test automatic article content and TOC
+        run: bundle exec ruby tests/test_post_layout.rb
       - name: Build site
         env:
           JEKYLL_ENV: production
           TZ: Asia/Tokyo
         run: bundle exec jekyll build --trace
+      - name: Check generated article layout
+        run: python3 scripts/check_post_layout.py

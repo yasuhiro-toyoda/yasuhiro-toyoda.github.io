@@ -1,0 +1,37 @@
+{%- comment -%}
+  Require the same category and a shared topic tag. Generic tags alone do not
+  establish relevance. Rank by shared topic count, then publication date.
+{%- endcomment -%}
+{%- assign generic_tags = 'dev-memo,workflow,beginner,site-info' | split: ',' -%}
+{%- assign related_count = 0 -%}
+{%- assign maximum_matches = page.tags.size | default: 0 -%}
+{%- capture related_items -%}
+  {%- if maximum_matches > 0 -%}
+    {%- for required_matches in (1..maximum_matches) reversed -%}
+      {%- for candidate in site.posts -%}
+        {%- if candidate.url != page.url and candidate.category == page.category -%}
+          {%- assign shared_topics = 0 -%}
+          {%- for tag in page.tags -%}
+            {%- unless generic_tags contains tag -%}
+              {%- if candidate.tags contains tag -%}
+                {%- assign shared_topics = shared_topics | plus: 1 -%}
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
+          {%- if shared_topics == required_matches -%}
+            <li><a href="{{ candidate.url | relative_url }}">{{ candidate.title | escape }}</a></li>
+            {%- assign related_count = related_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endif -%}
+        {%- if related_count >= 3 -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if related_count >= 3 -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- if related_count > 0 -%}
+  <nav class="post-related" aria-labelledby="post-related-title">
+    <h2 id="post-related-title">関連記事</h2>
+    <ul>{{ related_items }}</ul>
+  </nav>
+{%- endif -%}
