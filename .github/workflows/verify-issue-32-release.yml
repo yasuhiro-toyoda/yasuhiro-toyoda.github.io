@@ -1,0 +1,119 @@
+name: Verify published Issue 32
+
+on:
+  pull_request:
+    branches: [dev]
+    types: [opened, synchronize, reopened]
+    paths: ['.github/workflows/verify-issue-32-release.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    if: github.head_ref == 'chore/verify-issue-32-release' && github.event.pull_request.head.repo.full_name == github.repository
+    name: Published CSS and browser verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: b5c8a85292ee614070290d83ba962e514ba07b3b
+          persist-credentials: false
+      - name: Install pinned browser dependencies
+        run: |
+          python3 -m pip install -r tests/requirements-browser.txt
+          python3 -m playwright install --with-deps chromium webkit
+      - name: Inspect published pages without sending analytics
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import re
+          import sys
+          from urllib.parse import urlsplit
+          from playwright.sync_api import sync_playwright
+          sys.path.insert(0, 'scripts')
+          import check_responsive_layout as checks
+
+          origin = 'https://musashistudio.com'
+          release = 'b5c8a85292ee614070290d83ba962e514ba07b3b'
+          output = Path('_live-release-report')
+          output.mkdir(exist_ok=True)
+          expected_css = Path('assets/css/site.css').read_bytes()
+          report = {'release_sha': release, 'origin': origin, 'browsers': {}, 'errors': []}
+          allowed = {'musashistudio.com', 'fonts.googleapis.com', 'fonts.gstatic.com'}
+          with sync_playwright() as playwright:
+              for name in ('chromium', 'webkit'):
+                  browser = getattr(playwright, name).launch()
+                  context = browser.new_context(viewport={'width': 390, 'height': 844}, locale='ja-JP', reduced_motion='reduce')
+                  context.route('**/*', lambda route: route.continue_() if urlsplit(route.request.url).hostname in allowed else route.abort())
+                  page = context.new_page()
+                  page.set_default_timeout(20000)
+                  page.set_default_navigation_timeout(45000)
+                  result = {'version': browser.version, 'measurements': [], 'scrollable_code_blocks': 0, 'toc_pages': 0}
+                  report['browsers'][name] = result
+                  try:
+                      css_response = context.request.get(origin + '/assets/css/site.css?release=' + release, headers={'Cache-Control': 'no-cache'})
+                      checks.require(css_response.ok, 'Published CSS request failed')
+                      actual_css = css_response.body()
+                      result['css_sha256'] = hashlib.sha256(actual_css).hexdigest()
+                      checks.require(actual_css == expected_css, 'Published CSS differs from approved release')
+                      checks.visit(page, origin + '/blog/')
+                      posts = sorted(set(href for href in page.locator('.post-card a[href]').evaluate_all('els => els.map(e => e.href)')
+                                         if urlsplit(href).hostname == 'musashistudio.com' and re.match(r'^/blog/\d{4}/\d{2}/\d{2}/', urlsplit(href).path)))
+                      checks.require(len(posts) == 17, f'Expected 17 published articles, found {len(posts)}')
+                      result['articles'] = len(posts)
+                      links = set()
+                      for width in (390, 1440):
+                          page.set_viewport_size({'width': width, 'height': 844})
+                          for url in posts:
+                              checks.visit(page, url)
+                              data = checks.geometry(page)
+                              checks.check_geometry(data)
+                              checks.check_content_bounds(page)
+                              result['measurements'].append({'url': url, 'width': width, **data})
+                              links.update(page.locator('.site-nav a, .brand, .blog-post__footer a').evaluate_all('els => els.map(e => e.href)'))
+                              if width == 390:
+                                  stem = hashlib.sha256(url.encode()).hexdigest()[:12]
+                                  page.screenshot(path=str(output / f'{name}-{stem}-390.png'))
+                                  result['toc_pages'] += int(checks.check_toc(page))
+                                  result['scrollable_code_blocks'] += checks.check_code_scrolling(page)
+                                  checks.check_geometry(checks.geometry(page))
+                          for suffix in ('/', '/blog/'):
+                              checks.visit(page, origin + suffix)
+                              checks.require(page.evaluate('document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1'), f'Page overflow: {suffix} at {width}')
+                              label = 'home' if suffix == '/' else 'blog'
+                              page.screenshot(path=str(output / f'{name}-{label}-{width}.png'))
+                      local_links = sorted(href for href in links if urlsplit(href).hostname == 'musashistudio.com')
+                      for href in local_links:
+                          response = context.request.get(href)
+                          checks.require(response.ok, f'Published navigation failed: {href}: {response.status}')
+                      result['links_checked'] = len(local_links)
+                      checks.require(result['scrollable_code_blocks'] > 0, 'No code scrolling was tested')
+                      checks.require(result['toc_pages'] == 17, 'Not all TOCs were tested')
+                      result['status'] = 'passed'
+                      print(f'{name}: LIVE CSS matches {release}; {len(posts)} articles x 2 widths; {result["scrollable_code_blocks"]} code blocks scrolled; {result["toc_pages"]} TOCs; {len(local_links)} links passed', flush=True)
+                  except Exception as error:
+                      result['status'] = 'failed'
+                      report['errors'].append(f'{name}: {page.url}: {error}')
+                      print(report['errors'][-1], flush=True)
+                      try:
+                          page.screenshot(path=str(output / f'{name}-failure.png'))
+                      except Exception:
+                          pass
+                  finally:
+                      context.close()
+                      browser.close()
+                      (output / 'report.json').write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
+          raise SystemExit(1 if report['errors'] else 0)
+          PY
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: issue-32-live-release-b5c8a85
+          path: _live-release-report/
+          retention-days: 14
+          if-no-files-found: warn
