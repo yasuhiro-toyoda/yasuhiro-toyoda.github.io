@@ -1,0 +1,2 @@
+# Keep the Python client and browser binaries on the same pinned version.
+playwright==1.57.0
