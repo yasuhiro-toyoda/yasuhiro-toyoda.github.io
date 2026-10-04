@@ -133,13 +133,15 @@ h6 {
 }
 
 .brand {
-  display: inline-block;
-  color: var(--heading);
-  font-family: var(--ui-font);
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: 0;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
   text-decoration: none;
+}
+
+.brand-wordmark {
+  width: clamp(200px, 20vw, 260px);
+  height: auto;
 }
 
 .brand-subtitle {
@@ -1887,6 +1889,10 @@ h6 {
 
   .brand-subtitle {
     font-size: 0.78rem;
+  }
+
+  .brand-wordmark {
+    width: min(220px, 70vw);
   }
 
   .page-header {
