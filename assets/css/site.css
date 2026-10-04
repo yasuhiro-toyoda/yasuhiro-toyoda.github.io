@@ -870,7 +870,7 @@ h6 {
 
 .blog-post__grid {
   display: grid;
-  grid-template-columns: minmax(0, var(--article-width));
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     "header"
     "body"
@@ -1291,8 +1291,8 @@ h6 {
   line-height: 1.4;
 }
 
-.post-body .highlighter-rouge,
-.post-body .highlight {
+.post-body div.highlighter-rouge,
+.post-body div.highlight {
   max-width: 100%;
   overflow: hidden;
   border-radius: var(--radius-code);
@@ -1720,16 +1720,7 @@ h6 {
 
 @media (max-width: 1040px) {
   .blog-post__grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "header"
-      "body"
-      "rail";
     gap: 1rem;
-  }
-
-  .blog-post__rail {
-    position: static;
   }
 }
 

@@ -67,3 +67,25 @@ jobs:
         run: bundle exec jekyll build --trace
       - name: Check generated article layout
         run: python3 scripts/check_post_layout.py
+      - name: Install browser regression dependencies
+        run: |
+          python3 -m pip install -r tests/requirements-browser.txt
+          python3 -m playwright install --with-deps chromium webkit
+      - name: Check responsive article layout and real code scrolling
+        run: python3 scripts/check_responsive_layout.py
+      - name: Upload browser measurements and screenshots
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: responsive-layout-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: _layout-report/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Upload built site for local owner review
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: review-site-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: _site/
+          if-no-files-found: error
+          retention-days: 14
