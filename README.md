@@ -175,3 +175,9 @@ READMEには公開可能な運用ルール・更新手順・構成を記載し�
 
 固定ページはindex.htmlやabout/index.htmlなど、ツモログのページはapps/tsumolog/配下にあります。
 ドメインは [CNAME](CNAME)、サイト設定は [_config.yml](_config.yml) を参照します。
+
+## ブランドロゴ・共通アイコン
+
+文字ロゴはF4（Musashi / Digital Studioの2段構成）、サイトと屋号の共通アイコンはG1（濃紺地に白いM）を正式に採用しています。
+ヘッダーにはF4のSVG、favicon・ホーム画面・manifestにはG1を使用します。
+素材、配色、更新時の確認事項は [ブランド素材の使い方](docs/brand-assets.md) を参照してください。
