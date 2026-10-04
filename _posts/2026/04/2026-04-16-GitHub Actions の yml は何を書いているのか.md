@@ -175,6 +175,8 @@ Python のスクレイピング用途なら、まずはこれで十分です。
 
 これらの名前は、この記事のサンプルに合わせたものです。GitHubが自動で値を発行するわけではないので、Google側で準備した値を登録します。
 
+値の取得から始める場合は、[Google Drive APIのOAuth設定]({% post_url 2026/10/2026-10-04-google-drive-api-oauth %})で、クライアント作成とリフレッシュトークンの準備を説明しています。
+
 ### 3. NameとSecretを入力して保存する
 
 **Name** は `yml` から参照するための名前、**Secret** は保存する実際の値です。たとえばNameに `GOOGLE_DRIVE_FOLDER_ID`、Secretに保存先のフォルダIDを入力し、**Add secret** を押します。
