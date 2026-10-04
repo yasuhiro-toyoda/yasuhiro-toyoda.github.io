@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "GitHub Actions の yml は何を書いているのか"
-description: "GitHub Actions の workflow yml で何を書くのかを、schedule / runs-on / checkout / secrets / python 実行の順で整理します。"
+description: "GitHub Actions の workflow yml の役割を整理し、Repository Secretsの登録手順をスクリーンショット付きで解説します。"
 date: 2026-04-16 12:00:00 +0900
-updated_at:
+updated_at: 2026-10-04 14:00:00 +0900
 category: 開発
 tags:
   - workflow
@@ -11,7 +11,7 @@ tags:
   - dev-memo
 thumbnail: /assets/images/blog/2026-04-16-github-actions-yml/thumbnail.png
 thumbnail_alt: "GitHub Actionsのymlの読み方。設定を読む人物と時計・鍵を描いたイラスト"
-excerpt: "GitHub Actions の yml は、いつ動かすか、どんな環境で動かすか、Secrets をどう渡すかを書くための設定ファイルです。"
+excerpt: "GitHub Actions の yml の読み方と、Secretsを画面から登録してPythonに渡すまでの流れを整理します。"
 ---
 {% assign related_scraping_url = '/blog/2026/04/16/GitHub-Actionsを使った無料スクレイピング術/' | relative_url %}
 {% include bookmark-card.html
@@ -146,6 +146,45 @@ Python のスクレイピング用途なら、まずはこれで十分です。
 
 このステップがあることで、毎回クリーンな GitHub Actions 環境でも同じ依存関係を再現できます。
 
+## GitHubの画面でSecretsを登録する
+
+`yml` にSecretsの参照を書く前に、GitHub側に値を登録しておきます。ここでは、上のサンプルで使う4つの値を **Repository secrets** に登録します。
+
+掲載画面は2026年4月に撮影したものです。アカウント名・リポジトリ名・URL・プロフィール画像などが写る範囲は切り取り、認証情報やフォルダIDの実際の値は掲載していません。
+
+### 1. SettingsからActionsのSecretsを開く
+
+対象リポジトリの **Settings** を開き、左側の **Secrets and variables → Actions** を選びます。リポジトリ上部にもActionsタブがありますが、Secretsの登録先はSettings内です。
+
+![Settingsの左メニューでSecrets and variablesを展開し、Actionsを選べる状態](/assets/images/blog/2026-04-16-github-actions-yml/secrets-menu.png)
+
+### 2. New repository secretを選ぶ
+
+**Secrets** タブの **Repository secrets** にある **New repository secret** を押します。上にあるEnvironment secretsとは登録先が異なるので、今回はRepository secretsを使います。
+
+![SecretsタブにあるRepository secretsの一覧とNew repository secretボタン](/assets/images/blog/2026-04-16-github-actions-yml/repository-secrets.png)
+
+この画面では、Google認証用の3件がすでに登録されています。続いて `GOOGLE_DRIVE_FOLDER_ID` を追加する例で説明します。初めて設定する場合は、次の4件を1件ずつ登録します。
+
+| Nameに入れる名前 | Secretに入れる値 |
+| --- | --- |
+| `GOOGLE_CLIENT_ID` | 使用するOAuthクライアントのクライアントID |
+| `GOOGLE_CLIENT_SECRET` | そのOAuthクライアントのクライアントシークレット |
+| `GOOGLE_REFRESH_TOKEN` | Googleへの認証で取得したリフレッシュトークン |
+| `GOOGLE_DRIVE_FOLDER_ID` | 保存先のGoogle DriveフォルダID |
+
+これらの名前は、この記事のサンプルに合わせたものです。GitHubが自動で値を発行するわけではないので、Google側で準備した値を登録します。
+
+### 3. NameとSecretを入力して保存する
+
+**Name** は `yml` から参照するための名前、**Secret** は保存する実際の値です。たとえばNameに `GOOGLE_DRIVE_FOLDER_ID`、Secretに保存先のフォルダIDを入力し、**Add secret** を押します。
+
+![New secretフォームでNameにGOOGLE_DRIVE_FOLDER_IDを入力した状態。Secret欄は未入力](/assets/images/blog/2026-04-16-github-actions-yml/new-secret.png)
+
+画像のSecret欄は未入力です。実際に保存するときは自分の値を入力してください。登録後は一覧に戻り、必要な4つの名前がそろっていることを確認します。
+
+操作の詳細は[GitHub公式ドキュメント「GitHub Actionsでのシークレットの使用」](https://docs.github.com/ja/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)でも確認できます。
+
 ## env: で Secrets を Python に渡す
 
 {% raw %}
@@ -169,7 +208,11 @@ Python 側では `os.environ["..."]` で受け取ります。
 - `yml`: Secrets を安全に渡す
 - Python: 環境変数として受け取って使う
 
-この構造にしておけば、ソースコードを公開しても認証情報はコード上に出ません。
+たとえば `GOOGLE_CLIENT_ID` の行では、左側がPythonに渡す環境変数名、右側の `secrets.GOOGLE_CLIENT_ID` がGitHubに登録したSecretの参照です。上で登録したNameと、`secrets.` の後ろの名前をそろえます。
+
+Secretが未登録だったり、参照する名前を間違えたりすると、その参照は空文字列になります。認証エラーが出たら、まず登録先のリポジトリと名前の対応を確認します。
+
+この構造なら、認証情報の値を `yml` やPythonのソースコードに直接書かずに済みます。ただし、確認のために `print()` や `echo` で値を出力しないようにします。実行ログやスクリーンショットにも認証情報を残さないことが大切です。
 
 ## 最後に python main.py を実行する
 
@@ -197,6 +240,7 @@ Python 側では `os.environ["..."]` で受け取ります。
 {% capture yml_points %}
 - `on:` で実行タイミングを決める
 - `runs-on` と `setup-python` で実行環境をそろえる
+- SettingsでRepository Secretsを登録し、Nameと参照名をそろえる
 - `env:` で Secrets を渡し、処理本体は Python に寄せる
 {% endcapture %}
 {% include callout.html type="tip" title="今回のポイント" content=yml_points %}
