@@ -4,6 +4,7 @@
 /.jekyll-cache/
 /.sass-cache/
 /_site/
+/_layout-report/
 /vendor/bundle/
 /jekyll-serve.log
 /jekyll-serve.err.log
