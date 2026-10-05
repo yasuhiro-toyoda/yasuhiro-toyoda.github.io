@@ -24,3 +24,6 @@
   label: Gitea
 - slug: git
   label: Git
+- slug: ga4
+  label: GA4
+
