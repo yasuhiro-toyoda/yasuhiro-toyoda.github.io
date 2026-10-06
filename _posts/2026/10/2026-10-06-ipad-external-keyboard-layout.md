@@ -26,15 +26,15 @@ iPadに外部キーボードをつないだとき、キーに書いてある文�
 3. 「一般」→「キーボード」→「ハードウェアキーボード」の順に進みます。
 4. 画面上部の入力言語をタップし、表示される配列を確認します。
 
-「キーボード」画面では、「ユーザ辞書」の下に「ハードウェアキーボード」があります。
+「キーボード」画面では、「ユーザ辞書」の下に「ハードウェアキーボード」があります。画像はタップまたはクリックすると、大きく表示できます。
 
-![iPadのキーボード設定。「キーボード」「ユーザ辞書」「ハードウェアキーボード」が並ぶ画面](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/keyboard-settings.png)
+[![iPadのキーボード設定。「キーボード」「ユーザ辞書」「ハードウェアキーボード」が並ぶ画面](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/keyboard-settings.png)](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/keyboard-settings.png)
 
 *接続後の「キーボード」設定画面。記事に必要な設定部分だけを切り抜いています。*
 
 「ハードウェアキーボード」を開くと、入力言語ごとに現在の配列を確認できます。掲載画面では「日本語－ローマ字入力」と「英語（日本）」が並んでいます。
 
-![ハードウェアキーボード設定。日本語のローマ字入力と英語の配列が、どちらも自動－ABCと表示されている](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/hardware-keyboard.png)
+[![ハードウェアキーボード設定。日本語のローマ字入力と英語の配列が、どちらも自動－ABCと表示されている](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/hardware-keyboard.png)](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/hardware-keyboard.png)
 
 *設定を変えたい入力言語の行をタップします。表示される言語は、登録しているキーボードによって異なります。*
 
@@ -57,7 +57,7 @@ Appleのユーザガイドでも、Apple製の外部キーボードについて�
 
 次の画面は、「日本語－ローマ字入力」で「自動－ABC」を選んでいる例です。「ABC」「かな入力」「ABC－AZERTY」「ABC－QWERTZ」などの候補が表示されています。
 
-![日本語のローマ字入力に使う配列の選択画面。自動－ABCにチェックが付いている](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/keyboard-layout.png)
+[![日本語のローマ字入力に使う配列の選択画面。自動－ABCにチェックが付いている](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/keyboard-layout.png)](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/keyboard-layout.png)
 
 *「自動－ABC」が選択されている例。この設定がすべてのキーボードに適するという意味ではありません。変更後は入力欄で結果を確認します。*
 
@@ -74,7 +74,7 @@ Appleのユーザガイドでも、Apple製の外部キーボードについて�
 3. 「ナチュラルなスクロール」を切り替えます。
 4. Safariなどでページをスクロールし、使いやすい方向になったか確認します。
 
-![トラックパッドとマウスの設定画面。ナチュラルなスクロールがオンになっている](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/mouse-scroll.png)
+[![トラックパッドとマウスの設定画面。ナチュラルなスクロールがオンになっている](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/mouse-scroll.png)](/assets/images/blog/2026-10-06-ipad-external-keyboard-layout/mouse-scroll.png)
 
 *「ナチュラルなスクロール」がオンの例。スイッチを切り替えて、普段の操作に合う方向を選びます。*
 
