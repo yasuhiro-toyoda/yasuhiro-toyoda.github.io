@@ -24,3 +24,5 @@
   label: Gitea
 - slug: git
   label: Git
+- slug: ipad
+  label: iPad
