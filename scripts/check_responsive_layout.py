@@ -226,6 +226,10 @@ def main() -> int:
                         check_geometry(data)
                         check_content_bounds(page)
                         result["measurements"].append({"url": url, "width": width, **data})
+                        # Temporary review-only artifact capture; not for publication.
+                        if width in (320, 390, 1440) and any(slug in url for slug in ("git-file-recovery", "passkeys-phishing-resistance")):
+                            stem = sha256(url.encode()).hexdigest()[:12]
+                            page.screenshot(path=str(args.report / f"{name}-{stem}-{width}-full.png"), full_page=True)
                         if width == 390:
                             stem = sha256(url.encode()).hexdigest()[:12]
                             page.screenshot(path=str(args.report / f"{name}-{stem}-390.png"))

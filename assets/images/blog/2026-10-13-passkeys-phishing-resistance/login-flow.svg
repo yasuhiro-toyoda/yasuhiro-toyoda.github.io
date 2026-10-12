@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1170" viewBox="0 0 600 1170" role="img" aria-labelledby="title desc">
+<title id="title">パスキーでログインする流れ</title>
+<desc id="desc">サービスが今回のチャレンジを作り、ブラウザーへ送る。ブラウザーは要求元のサイトとRP IDの対応を確認する。認証器は対応する秘密鍵を選び、利用者確認後に署名する。署名と検証用データはブラウザー経由でサービスへ戻り、公開鍵、チャレンジ、origin、RP IDのハッシュ、利用者確認の結果などが検証される。</desc>
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="8" refY="5" orient="auto"><path d="M0 0 L9 5 L0 10" fill="none" stroke="#466353" stroke-width="2"/></marker></defs>
+<rect width="600" height="1170" rx="20" fill="#f9faf6"/>
+<g font-family="'Noto Sans CJK JP','Noto Sans JP',sans-serif" fill="#22392e">
+<text x="32" y="51" font-size="30" font-weight="700">パスキーでログインする流れ</text>
+<text x="32" y="89" font-size="23">秘密鍵は利用者側／公開鍵はサービス側</text>
+<rect x="28" y="115" width="544" height="122" rx="12" fill="#fff" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="153" font-size="27" font-weight="700">① サービス</text>
+<text x="48" y="190" font-size="24">今回の認証用に、予測困難な</text>
+<text x="48" y="223" font-size="24">チャレンジ（ランダム値）を作る</text>
+<path d="M85 247 V300" stroke="#466353" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="116" y="281" font-size="24">チャレンジ＋RP IDなど</text>
+<rect x="28" y="317" width="544" height="130" rx="12" fill="#fff" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="358" font-size="27" font-weight="700">② ブラウザー</text>
+<text x="48" y="399" font-size="24">要求元のサイトが、そのRP IDを</text>
+<text x="48" y="432" font-size="24">使ってよいか確認</text>
+<path d="M85 457 V515" stroke="#466353" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="116" y="493" font-size="24">RP IDと署名に使うデータ</text>
+<rect x="28" y="532" width="544" height="174" rx="12" fill="#edf3e9" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="576" font-size="27" font-weight="700">③ 認証器</text>
+<text x="48" y="617" font-size="24">RP IDに対応する秘密鍵を選ぶ</text>
+<text x="48" y="650" font-size="24">指紋・顔・PINなどで本人確認</text>
+<text x="48" y="683" font-size="24">秘密鍵で署名を作る</text>
+<path d="M85 717 V797" stroke="#466353" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="116" y="747" font-size="24">ブラウザー経由で</text>
+<text x="116" y="782" font-size="24">署名＋検証用データを返す</text>
+<rect x="28" y="814" width="544" height="252" rx="12" fill="#fff" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="856" font-size="27" font-weight="700">④ サービス</text>
+<text x="48" y="898" font-size="24">登録済みの公開鍵で署名を検証</text>
+<text x="48" y="931" font-size="24">今回のチャレンジ、origin、</text>
+<text x="48" y="964" font-size="24">RP IDのハッシュ、本人確認の結果</text>
+<text x="48" y="997" font-size="24">なども確認</text>
+<text x="48" y="1040" font-size="25" font-weight="700">条件を満たせば、ログインを認める</text>
+<text x="32" y="1108" font-size="21">端末内の認証器を使う例。通信の細部は省略</text>
+<text x="32" y="1144" font-size="20" fill="#56685a">出典：WebAuthn Level 3 §6.3.3・§7.2</text>
+</g></svg>
