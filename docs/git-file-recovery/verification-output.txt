@@ -1,0 +1,371 @@
+Git file recovery: actual execution transcript
+OS: Linux-6.18.44-x86_64-with-glibc2.39
+Python: 3.12.14
+Git: git version 2.51.1
+Shell: Git commands invoked by Python subprocess on Linux; no Windows/PowerShell execution
+Isolation: new disposable repository per case; local bare remote only; global Git config disabled
+
+## 1. Unstaged deletion: index -> worktree, other changes preserved
+$ git rev-parse HEAD
+exit=0
+71ae8e86b5ff0a22a282035c6504367f7f0aa277
+memo.txt content: '<missing>'
+$ git status --short -- memo.txt
+exit=0
+ D memo.txt
+$ git restore -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: 'saved version\n'
+$ git status --short
+exit=0
+ M other.txt
+$ git rev-parse HEAD
+exit=0
+71ae8e86b5ff0a22a282035c6504367f7f0aa277
+PASS
+
+## 2. Staged deletion: --staged alone does not recover the worktree
+$ git rm -- memo.txt
+exit=0
+rm 'memo.txt'
+$ git status --short
+exit=0
+D  memo.txt
+$ git restore --staged -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: '<missing>'
+$ git status --short
+exit=0
+ D memo.txt
+$ git add -- memo.txt
+exit=0
+(stdout empty)
+$ git restore --source=HEAD --staged --worktree -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: 'saved version\n'
+$ git status --short
+exit=0
+(stdout empty)
+PASS
+
+## 3. Staged edit followed by deletion: restore uses the index, not HEAD
+$ git add -- memo.txt
+exit=0
+(stdout empty)
+$ git status --short
+exit=0
+MD memo.txt
+$ git restore -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: 'staged edited version\n'
+$ git status --short
+exit=0
+M  memo.txt
+$ git show HEAD:memo.txt
+exit=0
+saved version
+PASS
+
+## 4. Committed mixed deletion: restore only the target; preserve staged and unstaged edits
+$ git rm -- memo.txt
+exit=0
+rm 'memo.txt'
+$ git add -- other.txt
+exit=0
+(stdout empty)
+$ git commit -m 'Delete memo and update other'
+exit=0
+[main f9b37d4] Delete memo and update other
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+ delete mode 100644 memo.txt
+$ git rev-parse HEAD
+exit=0
+f9b37d4493b64f06aeeef9ed2435c56207387753
+$ git status --short
+exit=0
+(stdout empty)
+$ git log --oneline --diff-filter=D -- memo.txt
+exit=0
+f9b37d4 Delete memo and update other
+$ git show --stat f9b37d4493b64f06aeeef9ed2435c56207387753
+exit=0
+commit f9b37d4493b64f06aeeef9ed2435c56207387753
+Author: Recovery Example <example@example.invalid>
+Date:   Mon Oct 12 18:01:40 2026 +0900
+
+    Delete memo and update other
+
+ memo.txt  | 1 -
+ other.txt | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+$ git show 'f9b37d4493b64f06aeeef9ed2435c56207387753^:memo.txt'
+exit=0
+saved version
+$ git add -- other.txt
+exit=0
+(stdout empty)
+$ git diff --staged -- other.txt
+exit=0
+diff --git a/other.txt b/other.txt
+index 2eea462..daaa293 100644
+--- a/other.txt
++++ b/other.txt
+@@ -1 +1 @@
+-intentional committed edit
++unrelated staged edit
+$ git restore '--source=f9b37d4493b64f06aeeef9ed2435c56207387753^' -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: 'saved version\n'
+$ git rev-parse HEAD
+exit=0
+f9b37d4493b64f06aeeef9ed2435c56207387753
+$ git diff --staged -- other.txt
+exit=0
+diff --git a/other.txt b/other.txt
+index 2eea462..daaa293 100644
+--- a/other.txt
++++ b/other.txt
+@@ -1 +1 @@
+-intentional committed edit
++unrelated staged edit
+later.txt content: 'unrelated unstaged edit\n'
+$ git status --short
+exit=0
+ M later.txt
+M  other.txt
+?? memo.txt
+$ git add -- memo.txt
+exit=0
+(stdout empty)
+$ git diff --staged -- memo.txt
+exit=0
+diff --git a/memo.txt b/memo.txt
+new file mode 100644
+index 0000000..0a059d2
+--- /dev/null
++++ b/memo.txt
+@@ -0,0 +1 @@
++saved version
+$ git status --short
+exit=0
+ M later.txt
+A  memo.txt
+M  other.txt
+PASS
+
+## 5. Pushed deletion: restore + a new commit + ordinary push
+$ git push -u origin main
+exit=0
+branch 'main' set up to track 'origin/main'.
+stderr: To <temporary-root>/restore-remote.git
+ * [new branch]      main -> main
+$ git rm -- memo.txt
+exit=0
+rm 'memo.txt'
+$ git commit -m 'Delete memo'
+exit=0
+[main 3cf0094] Delete memo
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 memo.txt
+$ git rev-parse HEAD
+exit=0
+3cf0094bfcbd9e7645294ca4ed4783b51b45af26
+$ git push
+exit=0
+(stdout empty)
+stderr: To <temporary-root>/restore-remote.git
+   71ae8e8..3cf0094  main -> main
+$ git fetch origin
+exit=0
+(stdout empty)
+$ git branch -r --contains 3cf0094bfcbd9e7645294ca4ed4783b51b45af26
+exit=0
+  origin/HEAD -> origin/main
+  origin/main
+$ git restore '--source=3cf0094bfcbd9e7645294ca4ed4783b51b45af26^' -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: 'saved version\n'
+$ git add -- memo.txt
+exit=0
+(stdout empty)
+$ git diff --staged
+exit=0
+diff --git a/memo.txt b/memo.txt
+new file mode 100644
+index 0000000..0a059d2
+--- /dev/null
++++ b/memo.txt
+@@ -0,0 +1 @@
++saved version
+$ git commit -m 'Restore memo'
+exit=0
+[main 828dd1b] Restore memo
+ 1 file changed, 1 insertion(+)
+ create mode 100644 memo.txt
+$ git push
+exit=0
+(stdout empty)
+stderr: To <temporary-root>/restore-remote.git
+   3cf0094..828dd1b  main -> main
+$ git show main:memo.txt
+exit=0
+saved version
+$ git merge-base --is-ancestor 3cf0094bfcbd9e7645294ca4ed4783b51b45af26 HEAD
+exit=0
+(stdout empty)
+$ git status --short
+exit=0
+(stdout empty)
+$ git log --oneline -3
+exit=0
+828dd1b Restore memo
+3cf0094 Delete memo
+71ae8e8 Add initial files
+PASS
+
+## 6. Pushed mixed commit: revert reverses all its changes and preserves a later unrelated commit
+$ git push -u origin main
+exit=0
+branch 'main' set up to track 'origin/main'.
+stderr: To <temporary-root>/revert-remote.git
+ * [new branch]      main -> main
+$ git rm -- memo.txt
+exit=0
+rm 'memo.txt'
+$ git add -- other.txt
+exit=0
+(stdout empty)
+$ git commit -m 'Delete memo and update other'
+exit=0
+[main 56fa737] Delete memo and update other
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+ delete mode 100644 memo.txt
+$ git rev-parse HEAD
+exit=0
+56fa737636db450b6cc37bae944a346e9a754a44
+$ git add -- later.txt
+exit=0
+(stdout empty)
+$ git commit -m 'Update later'
+exit=0
+[main 72a66b0] Update later
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git push
+exit=0
+(stdout empty)
+stderr: To <temporary-root>/revert-remote.git
+   5824054..72a66b0  main -> main
+$ git show --stat 56fa737636db450b6cc37bae944a346e9a754a44
+exit=0
+commit 56fa737636db450b6cc37bae944a346e9a754a44
+Author: Recovery Example <example@example.invalid>
+Date:   Mon Oct 12 18:01:41 2026 +0900
+
+    Delete memo and update other
+
+ memo.txt  | 1 -
+ other.txt | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+$ git revert --no-edit 56fa737636db450b6cc37bae944a346e9a754a44
+exit=0
+[main a0699a7] Revert "Delete memo and update other"
+ Date: Mon Oct 12 18:01:41 2026 +0900
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+ create mode 100644 memo.txt
+memo.txt content: 'saved version\n'
+other.txt content: 'other original\n'
+later.txt content: 'later committed edit\n'
+$ git push
+exit=0
+(stdout empty)
+stderr: To <temporary-root>/revert-remote.git
+   72a66b0..a0699a7  main -> main
+$ git merge-base --is-ancestor 56fa737636db450b6cc37bae944a346e9a754a44 HEAD
+exit=0
+(stdout empty)
+$ git status --short
+exit=0
+(stdout empty)
+$ git log --oneline -4
+exit=0
+a0699a7 Revert "Delete memo and update other"
+72a66b0 Update later
+56fa737 Delete memo and update other
+5824054 Add initial files
+PASS
+
+## 7. Revert conflict: abort returns to the state before revert
+$ git rm -- memo.txt
+exit=0
+rm 'memo.txt'
+$ git commit -m 'Delete memo'
+exit=0
+[main 2733c6f] Delete memo
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 memo.txt
+$ git rev-parse HEAD
+exit=0
+2733c6febd560b4a5d42cf343b8a2875c71bced8
+$ git add -- memo.txt
+exit=0
+(stdout empty)
+$ git commit -m 'Re-add different memo'
+exit=0
+[main f3771b1] Re-add different memo
+ 1 file changed, 1 insertion(+)
+ create mode 100644 memo.txt
+$ git rev-parse HEAD
+exit=0
+f3771b186aa69174ca72a55868ad632c121d0779
+$ git revert --no-edit 2733c6febd560b4a5d42cf343b8a2875c71bced8
+exit=1
+Auto-merging memo.txt
+CONFLICT (add/add): Merge conflict in memo.txt
+stderr: error: could not revert 2733c6f... Delete memo
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm <pathspec>", then run
+hint: "git revert --continue".
+hint: You can instead skip this commit with "git revert --skip".
+hint: To abort and get back to the state before "git revert",
+hint: run "git revert --abort".
+hint: Disable this message with "git config set advice.mergeConflict false"
+$ git status --short
+exit=0
+AA memo.txt
+$ git revert --abort
+exit=0
+(stdout empty)
+memo.txt content: 'new independently added version\n'
+$ git rev-parse HEAD
+exit=0
+f3771b186aa69174ca72a55868ad632c121d0779
+$ git status --short
+exit=0
+(stdout empty)
+PASS
+
+## 8. Git never recorded a new file: restore cannot recover it
+$ git restore -- never-added.txt
+exit=1
+(stdout empty)
+stderr: error: pathspec 'never-added.txt' did not match any file(s) known to git
+never-added.txt content: '<missing>'
+$ git log --oneline -- never-added.txt
+exit=0
+(stdout empty)
+PASS
+
+## 9. Unstaged edits before deletion: restore cannot recover those newer bytes
+$ git restore -- memo.txt
+exit=0
+(stdout empty)
+memo.txt content: 'saved version\n'
+PASS
+
+ALL 9 CASES PASSED
