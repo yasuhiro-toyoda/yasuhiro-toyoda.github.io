@@ -16,7 +16,7 @@ layout: default
           <div class="post-meta__item">
             <dt class="post-meta__label">公開日</dt>
             <dd class="post-meta__value">
-              <time datetime="{{ created_at | date_to_xmlschema }}">{{ created_at | date: "%Y年%-m月%-d日" }}</time>
+              <time datetime="{{ created_at | date_to_xmlschema }}">{{ page.display_date | default: created_at | date: "%Y年%-m月%-d日" }}</time>
             </dd>
           </div>
           {% if updated_at and updated_at_key != created_at_key %}
