@@ -76,7 +76,7 @@ description: Musashi Digital Studio の記事一覧です。個人開発の作�
               <p class="post-card__excerpt">{{ post.excerpt | strip_html | strip | escape_once }}</p>
             {% endif %}
             <p class="post-card__meta">
-              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y年%-m月%-d日" }}</time>
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.display_date | default: post.date | date: "%Y年%-m月%-d日" }}</time>
               <span class="post-card__category">{{ post.category }}</span>
             </p>
             {% include tag-list.html tags=post_tags link_to_blog=true %}
