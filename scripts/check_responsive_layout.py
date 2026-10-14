@@ -226,6 +226,10 @@ def main() -> int:
                         check_geometry(data)
                         check_content_bounds(page)
                         result["measurements"].append({"url": url, "width": width, **data})
+                        if url.endswith("/local-ai-agent-security/") and width in (320, 390, 1440):
+                            page.screenshot(path=str(args.report / f"{name}-local-ai-full-{width}.png"), full_page=True)
+                            for index, card in enumerate(page.locator(".bookmark-card").all(), start=1):
+                                card.screenshot(path=str(args.report / f"{name}-local-ai-card-{index}-{width}.png"))
                         if width == 390:
                             stem = sha256(url.encode()).hexdigest()[:12]
                             page.screenshot(path=str(args.report / f"{name}-{stem}-390.png"))
