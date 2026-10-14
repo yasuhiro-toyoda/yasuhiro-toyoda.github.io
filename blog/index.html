@@ -66,10 +66,12 @@ description: Musashi Digital Studio の記事一覧です。個人開発の作�
         {% assign post_tags = post.tags | default: empty %}
         {% assign post_thumbnail = post.thumbnail | default: '/assets/images/blog/default-thumbnail.svg' %}
         {% assign post_thumbnail_alt = post.thumbnail_alt | default: post.title %}
-        <article class="post-card" data-post-card data-category="{{ post.category | escape }}" data-tags="{{ post_tags | join: ',' | escape }}"{% if forloop.index > posts_per_page %} hidden{% endif %}>
+        <article class="post-card"{% if post.thumbnail == false %} data-thumbnail="none"{% endif %} data-post-card data-category="{{ post.category | escape }}" data-tags="{{ post_tags | join: ',' | escape }}"{% if forloop.index > posts_per_page %} hidden{% endif %}>
+          {% unless post.thumbnail == false %}
           <a class="post-card__media" href="{{ post.url | relative_url }}" aria-label="{{ post.title | escape }}">
             <img class="post-card__thumbnail" src="{{ post_thumbnail | relative_url }}" alt="{{ post_thumbnail_alt | escape }}" loading="lazy" decoding="async">
           </a>
+          {% endunless %}
           <div class="post-card__content">
             <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
             {% if post.excerpt %}

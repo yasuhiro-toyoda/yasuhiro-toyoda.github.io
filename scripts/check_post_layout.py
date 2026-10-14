@@ -113,6 +113,18 @@ def check_article(root, site):
     return errors
 
 
+def check_index_card(card):
+    images = card.find(tag="img")
+    if card.attrs.get("data-thumbnail") == "none":
+        if images or card.find(css_class="post-card__media"):
+            return ["text-only blog cards must not retain an image or empty media frame"]
+    elif not images:
+        return ["blog index cards must retain an image unless explicitly text-only"]
+    if not (card.find(tag="h2") and card.find(css_class="post-card__excerpt") and card.find(tag="time")):
+        return ["blog index cards must retain title, excerpt and date"]
+    return []
+
+
 def check_site(site):
     errors, count = [], 0
     for path in sorted((site / "blog").rglob("index.html")):
@@ -124,8 +136,7 @@ def check_site(site):
     if index.is_file():
         cards = Document(index.read_text(encoding="utf-8")).root.find(css_class="post-card")
         for card in cards:
-            if not (card.find(tag="h2") and card.find(tag="img") and card.find(css_class="post-card__excerpt") and card.find(tag="time")):
-                errors.append("blog index cards must retain image, title, excerpt and date")
+            errors += check_index_card(card)
     if not count:
         errors.append("no generated article pages were found")
     return errors, count
