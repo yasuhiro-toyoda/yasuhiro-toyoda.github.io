@@ -5,13 +5,12 @@ description: "ローカルAIと、PCやメールを操作するAIエージェン
 date: 2026-10-14 13:30:00 +0900
 display_date: "2026-10-14 13:30:00 +0900"
 permalink: /blog/2026/10/14/local-ai-agent-security/
-updated_at:
+updated_at: 2026-10-14 16:34:00 +0900
 category: 開発
 tags:
   - AI
   - learning-log
-thumbnail: /assets/images/blog/2026-10-14-local-ai-agent-security/thumbnail.webp
-thumbnail_alt: "ローカルAIも100%安全ではない？という文字と、ノートPCを前に考える人物、メールと盾のイラスト"
+thumbnail: false
 excerpt: "ローカルで動くことと、安全に操作できることは別の話。AIエージェントの調査報告から、読めるデータ・実行できる操作・外部へ送れる情報を見直します。"
 ---
 
@@ -53,8 +52,6 @@ HiddenLayerが2026年2月3日に公開した[報告](https://www.hiddenlayer.com
   description="HiddenLayer／2026年2月3日。Webページの命令注入から操作へつながる実証。"
   label="一次資料・実証実験"
   domain="www.hiddenlayer.com"
-  image="/assets/images/blog/2026-10-14-local-ai-agent-security/source-web.svg"
-  image_alt="Webページと操作確認を表した当サイト作成の説明用図柄"
 %}
 
 ### 事例2：便利な追加機能を装って、マルウェアを配布した
@@ -73,8 +70,6 @@ Palo Alto NetworksのUnit 42は、2026年6月23日公開の[報告](https://unit
   description="Unit 42／2026年6月23日。配布サイトで観測した悪性スキルと配布手口の調査。"
   label="一次資料・配布物の観測"
   domain="unit42.paloaltonetworks.com"
-  image="/assets/images/blog/2026-10-14-local-ai-agent-security/source-skill.svg"
-  image_alt="追加機能の箱と虫眼鏡を表した当サイト作成の説明用図柄"
 %}
 
 ### 事例3：同僚を装ったメールに、認証情報を返信した
@@ -93,13 +88,9 @@ Varonisの2026年6月9日付[報告](https://www.varonis.com/blog/openclaw-phish
   description="Varonis／2026年6月9日。模擬データを使い、なりすましメールへの応答を検証。"
   label="一次資料・実証実験"
   domain="www.varonis.com"
-  image="/assets/images/blog/2026-10-14-local-ai-agent-security/source-mail.svg"
-  image_alt="メールと差出人確認を表した当サイト作成の説明用図柄"
 %}
 
 日本語では、[GIGAZINEの紹介記事（2026年6月11日）](https://gigazine.net/news/20260611-openclaw-ai-phishing/)でも読めます。これは同じVaronisの実験を紹介した記事で、別の被害事例ではありません。
-
-出典カードの図柄は当サイト作成の説明用イメージです。参照先の記事画像やロゴは転載していません。
 
 ## なぜ、読んだ文章が危険な操作につながるのか
 
