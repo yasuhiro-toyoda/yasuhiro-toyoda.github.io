@@ -24,10 +24,12 @@ description: Musashi Digital Studio のトップページです。個人開発�
     {% for post in site.posts limit:3 %}
       {% assign post_thumbnail = post.thumbnail | default: '/assets/images/blog/default-thumbnail.svg' %}
       {% assign post_thumbnail_alt = post.thumbnail_alt | default: post.title %}
-      <article class="post-card home-card">
+      <article class="post-card home-card"{% if post.thumbnail == false %} data-thumbnail="none"{% endif %}>
+        {% unless post.thumbnail == false %}
         <a class="post-card__media" href="{{ post.url | relative_url }}" aria-label="{{ post.title | escape }}">
           <img class="post-card__thumbnail" src="{{ post_thumbnail | relative_url }}" alt="{{ post_thumbnail_alt | escape }}" loading="lazy" decoding="async">
         </a>
+        {% endunless %}
         <div class="post-card__content">
           <p class="meta">{{ post.display_date | default: post.date | date: "%Y年%-m月%-d日" }} ・ {{ post.category }}</p>
           <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>

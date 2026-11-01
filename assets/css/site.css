@@ -722,6 +722,10 @@ h6 {
   margin-top: 0.8rem;
 }
 
+.post-card[data-thumbnail="none"] {
+  align-self: start;
+}
+
 .post-card__media {
   display: block;
   overflow: hidden;
