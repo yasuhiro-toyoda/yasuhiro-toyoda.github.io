@@ -5,7 +5,7 @@ description: "Python で取得・整形・CSV 出力・保存を分けて、GitH
 date: 2026-04-16 00:00:00 +0900
 # 既存の公開URLを維持する（表示日付はJST）。
 permalink: /blog/2026/04/15/GitHub-Actionsを使った無料スクレイピング術/
-updated_at:
+updated_at: "2026-11-02 10:57:20 +0900"
 category: 開発
 tags:
   - workflow
@@ -15,7 +15,7 @@ thumbnail: /assets/images/blog/2026-04-16-github-actions-scraping/thumbnail.png
 thumbnail_alt: "GitHub Actionsでスクレイピング。取得した情報のカードを整理して保存する手元のイラスト"
 excerpt: "スクレイピング処理を main / fetch / normalize / csv / upload に分けておくと、壊れにくく直しやすい構成にできます。"
 ---
-{% assign related_yml_url = '/blog/2026/04/16/github-actions-yml/' | relative_url %}
+{% assign related_yml_url = '/blog/2026/04/16/GitHub-Actions-の-yml-は何を書いているのか/' | relative_url %}
 {% include bookmark-card.html
   url=related_yml_url
   title="GitHub Actions の yml は何を書いているのか"
@@ -227,4 +227,4 @@ GitHub Actions を使った無料スクレイピング環境は、構成さえ�
 
 取得部分ばかりに目が向きがちですが、実際にはその後の整形や保存、実行基盤まで含めて設計したほうが長持ちします。
 
-`workflow yml` をどう書くかは別記事に分けたので、GitHub Actions 側の設定を整理したい場合は [GitHub Actions の yml は何を書いているのか]({{ '/blog/2026/04/16/github-actions-yml/' | relative_url }}) を続けて読むのがおすすめです。
+`workflow yml` をどう書くかは別記事に分けたので、GitHub Actions 側の設定を整理したい場合は [GitHub Actions の yml は何を書いているのか]({{ '/blog/2026/04/16/GitHub-Actions-の-yml-は何を書いているのか/' | relative_url }}) を続けて読むのがおすすめです。
