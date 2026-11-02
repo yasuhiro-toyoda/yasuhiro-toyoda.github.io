@@ -71,6 +71,10 @@ GEM
       google-protobuf (~> 4.31)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2026.6)
+      tzinfo (>= 1.0.0)
     unicode-display_width (1.8.0)
     webrick (1.9.2)
 
@@ -80,6 +84,8 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 4.4)
   jekyll-feed (~> 0.17)
+  tzinfo (~> 2.0)
+  tzinfo-data
   webrick (~> 1.8)
 
 BUNDLED WITH

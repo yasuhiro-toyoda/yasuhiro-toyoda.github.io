@@ -1,11 +1,22 @@
 require "jekyll"
 require "jekyll-feed"
+require "tzinfo"
+require "tzinfo/data"
 require "tmpdir"
 require "fileutils"
 require "rexml/document"
 
 root = File.expand_path("..", __dir__)
 original_tz = ENV["TZ"]
+unless TZInfo::DataSource.get.is_a?(TZInfo::DataSources::RubyDataSource)
+  raise "Windows-compatible timezone data must be available from the bundle"
+end
+[Time.utc(2026, 1, 1), Time.utc(2026, 7, 1)].each do |date|
+  unless Jekyll::Utils::WinTZ.calculate("Asia/Tokyo", date) == "WTZ-09:00"
+    raise "Windows timezone conversion must preserve JST in winter and summer"
+  end
+end
+puts "PASS: bundled timezone data and Windows JST conversion (winter/summer)"
 # Midnight, UTC/JST day boundary, month boundary and year boundary.
 dates = ["2026-01-01 00:00:00", "2026-04-01 00:01:00", "2026-04-16 08:59:59",
          "2026-04-16 09:00:00", "2026-04-30 23:59:59"]
