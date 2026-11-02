@@ -5,12 +5,13 @@ description: "ローカルAIと、PCやメールを操作するAIエージェン
 date: 2026-10-14 13:30:00 +0900
 display_date: "2026-10-14 13:30:00 +0900"
 permalink: /blog/2026/10/14/local-ai-agent-security/
-updated_at: "2026-11-02 08:43:47 +0900"
+updated_at: "2026-11-02 09:02:38 +0900"
 category: 開発
 tags:
   - AI
   - learning-log
-thumbnail: false
+thumbnail: /assets/images/blog/2026-10-14-local-ai-agent-security/thumbnail-simple-20261102.webp
+thumbnail_alt: "ローカルAIも100%安全ではない。ノートPCを前に考える人物を描いたシンプルなイラスト"
 excerpt: "ローカルで動くことと、安全に操作できることは別の話。AIエージェントの調査報告から、読めるデータ・実行できる操作・外部へ送れる情報を見直します。"
 ---
 
