@@ -3,6 +3,8 @@ layout: post
 title: "図解でわかる、デジタル証明書の各局｜CA・RA・VAの役割と覚え方"
 description: "デジタル証明書を支える認証局CA・登録局RA・検証局VAを、正式名称と直訳から整理。発行・検証・失効の流れを図解し、CRL、OCSP、ルートCA、発行局IAも解説します。"
 date: 2026-10-05 08:35:00 +0900
+# 既存の公開URLを維持する（表示日付はJST）。
+permalink: /blog/2026/10/04/digital-certificate-authorities/
 updated_at:
 category: 開発
 tags:

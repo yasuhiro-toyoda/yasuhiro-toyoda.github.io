@@ -3,7 +3,7 @@ layout: post
 title: "GitHub Actions の yml は何を書いているのか"
 description: "GitHub Actions の workflow yml の役割を整理し、Repository Secretsの登録手順をスクリーンショット付きで解説します。"
 date: 2026-04-16 12:00:00 +0900
-updated_at: 2026-10-04 14:00:00 +0900
+updated_at: "2026-11-02 10:57:20 +0900"
 category: 開発
 tags:
   - workflow
@@ -13,7 +13,7 @@ thumbnail: /assets/images/blog/2026-04-16-github-actions-yml/thumbnail.png
 thumbnail_alt: "GitHub Actionsのymlの読み方。設定を読む人物と時計・鍵を描いたイラスト"
 excerpt: "GitHub Actions の yml の読み方と、Secretsを画面から登録してPythonに渡すまでの流れを整理します。"
 ---
-{% assign related_scraping_url = '/blog/2026/04/16/GitHub-Actionsを使った無料スクレイピング術/' | relative_url %}
+{% assign related_scraping_url = '/blog/2026/04/15/GitHub-Actionsを使った無料スクレイピング術/' | relative_url %}
 {% include bookmark-card.html
   url=related_scraping_url
   title="GitHub Actionsを使った無料スクレイピング術"
