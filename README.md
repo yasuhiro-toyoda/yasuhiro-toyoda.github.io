@@ -68,6 +68,8 @@ PRの自動マージを事前に有効にせず、承認後に対象SHAを指定
 - thumbnailには/assets/images/blog/...形式のパス、thumbnail_altには画像の説明を設定します。
 - 参考画像はtemplates/thumbnail/にあります。見た目と容量を確認してから配置します。
 - ファイル名の日付とfront matterのdateを一致させ、日本時間の実際の公開日時を指定します。
+- 生成タイムゾーンは`_config.yml`の`Asia/Tokyo`を正本とします。CIとPages、ローカルの環境変数に依存させません。
+- 過去にUTCの日付で公開した9記事は`permalink`で既存URLを維持します。画面とフィードは原稿のJST日時で表示し、URL内の日付だけを表示日に合わせて変更しません。
 - テンプレートの例示日付をそのまま使いません。future: falseのため未来日時の記事は表示されません。
 - title、description、date、category、tags、excerptを確認します。
 - 見出しは必要最小限とし、内容が分かるタイトルにします。未経験のことを実体験として書きません。
@@ -157,7 +159,12 @@ bundle exec jekyll build --trace
 
 ~~~powershell
 python scripts/check_post_layout.py
+python scripts/check_publication_dates.py
 ~~~
+
+日付の検査は`tests/fixtures/published-post-urls.json`の既存24記事のURL、本文・一覧・フィードの日時、canonical・OG URLを照合します。
+`tests/test_publication_dates.rb`はUTC/JSTの両環境で深夜・午前9時前後・月末・年始の記事を生成し、新記事の日付とURLがJSTで一致することを確認します。
+本文内のリンク（カード・相対URL・フラグメントを含む）と見出し階層も生成後の検査対象です。
 
 ## 失敗・取り消しへの対応
 

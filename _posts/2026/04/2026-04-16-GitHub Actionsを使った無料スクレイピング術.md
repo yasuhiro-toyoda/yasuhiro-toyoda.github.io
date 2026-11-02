@@ -3,6 +3,8 @@ layout: post
 title: "GitHub Actionsを使った無料スクレイピング術"
 description: "Python で取得・整形・CSV 出力・保存を分けて、GitHub Actions で回しやすい無料スクレイピング構成を整理します。"
 date: 2026-04-16 00:00:00 +0900
+# 既存の公開URLを維持する（表示日付はJST）。
+permalink: /blog/2026/04/15/GitHub-Actionsを使った無料スクレイピング術/
 updated_at:
 category: 開発
 tags:

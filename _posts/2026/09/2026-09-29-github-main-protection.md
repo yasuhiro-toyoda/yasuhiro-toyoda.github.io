@@ -3,6 +3,8 @@ layout: post
 title: "GitHubを1人で使うときのmain保護設定｜PR承認0人・必須チェックの実例"
 description: "GitHubのRulesetsでmainを保護する設定例。PR必須・承認0人・必須ステータスチェック・回避者なしの設定と、PRでの確認手順を紹介します。"
 date: 2026-09-29 00:16:00 +0900
+# 既存の公開URLを維持する（表示日付はJST）。
+permalink: /blog/2026/09/28/github-main-protection/
 category: 開発
 tags:
   - workflow
