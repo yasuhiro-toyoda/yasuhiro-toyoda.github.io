@@ -3,7 +3,7 @@
 import argparse
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote, urljoin, urlsplit
 
 
 class Element:
@@ -70,6 +70,12 @@ def check_article(root, site):
     if not headers or not bodies:
         return errors
     header, body = headers[0], bodies[0]
+    previous_level = 1
+    for element in body.walk():
+        if element.tag in {"h2", "h3", "h4", "h5", "h6"}:
+            level = int(element.tag[1])
+            require(level <= previous_level + 1, "article headings must not skip a level")
+            previous_level = level
     require(len(root.find(tag="h1")) == 1 and len(header.find(tag="h1")) == 1,
             "H1 must be the article title only")
     require(not header.find(css_class="post-lead"), "the standalone excerpt must be hidden")
@@ -113,6 +119,34 @@ def check_article(root, site):
     return errors
 
 
+def check_internal_links(root, site, page_path):
+    """Resolve all article links, including inline and bookmark-card links."""
+    errors = []
+    canonical = next((e.attrs.get("href") for e in root.find(tag="link")
+                      if e.attrs.get("rel") == "canonical"), None)
+    base = canonical or "https://musashistudio.com/" + page_path.relative_to(site).as_posix()
+    host = urlsplit(base).netloc
+    for link in root.find(tag="a"):
+        href = link.attrs.get("href", "")
+        target_url = urlsplit(urljoin(base, href))
+        if not href or target_url.scheme not in {"http", "https"} or target_url.netloc != host:
+            continue
+        target = (site / unquote(target_url.path).lstrip("/")).resolve()
+        if not target.is_relative_to(site.resolve()):
+            errors.append(f"internal link escapes the site: {href}")
+            continue
+        if target.is_dir():
+            target /= "index.html"
+        if not target.is_file():
+            errors.append(f"internal link target does not exist: {href}")
+        elif target_url.fragment:
+            target_root = root if target == page_path.resolve() else Document(target.read_text(encoding="utf-8")).root
+            ids = {e.attrs.get("id") for e in target_root.walk()}
+            if unquote(target_url.fragment) not in ids:
+                errors.append(f"internal link fragment does not exist: {href}")
+    return errors
+
+
 def check_index_card(card):
     images = card.find(tag="img")
     if card.attrs.get("data-thumbnail") == "none":
@@ -132,6 +166,7 @@ def check_site(site):
         if root.find(css_class="post-layout"):
             count += 1
             errors += [f"{path.relative_to(site)}: {error}" for error in check_article(root, site)]
+            errors += [f"{path.relative_to(site)}: {error}" for error in check_internal_links(root, site, path)]
     index = site / "blog/index.html"
     if index.is_file():
         cards = Document(index.read_text(encoding="utf-8")).root.find(css_class="post-card")
