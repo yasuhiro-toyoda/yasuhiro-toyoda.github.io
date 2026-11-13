@@ -8,8 +8,8 @@ tags:
   - ga4
   - workflow
   - beginner
-thumbnail: /assets/images/blog/2026-11-14-ga4-exclude-own-traffic/experience-thumbnail.svg
-thumbnail_alt: "GA4のリアルタイムの結果。自宅Wi-Fiでは除外され、モバイル回線では計測された"
+thumbnail: /assets/images/blog/2026-11-14-ga4-exclude-own-traffic/thumbnail.png
+thumbnail_alt: "GA4で自宅Wi-Fiのアクセス除外を確認。ノートPCと、Wi-Fiマークを表示したiPhoneのイラスト"
 excerpt: "最も熱心な読者である私のアクセス（動作確認）がGA4では集計されてしまっていたので、自宅のIPを登録し、PCとiPhoneで開いたあと、最後にiPhoneのWi-Fiを切ってみました。"
 ---
 
