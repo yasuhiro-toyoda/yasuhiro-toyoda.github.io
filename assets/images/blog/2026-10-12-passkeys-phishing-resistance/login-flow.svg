@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1410" viewBox="0 0 600 1410" role="img" aria-labelledby="title desc">
+<title id="title">パスキーでログインする流れ</title>
+<desc id="desc">登録時にサービスはアオイさんの公開鍵を保存。ログイン時にサービスがチャレンジを送り、ブラウザーが要求元とRP IDの対応を確認。認証器は対応する秘密鍵を選び、本人確認後に署名する。ブラウザー経由で署名と検証用データがサービスへ戻り、公開鍵、チャレンジ、origin、RP ID、本人確認結果などを検証する。</desc>
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="8" refY="5" orient="auto"><path d="M0 0 L9 5 L0 10" fill="none" stroke="#466353" stroke-width="2"/></marker></defs>
+<rect width="600" height="1410" rx="20" fill="#f9faf6"/>
+<g font-family="'Noto Sans CJK JP','Noto Sans JP',sans-serif" fill="#22392e">
+<text x="32" y="53" font-size="30" font-weight="700">パスキーでログインする流れ</text>
+<text x="32" y="92" font-size="23">例：アオイさん／notes.example.com</text>
+<rect x="28" y="119" width="544" height="100" rx="12" fill="#e6ede1"/>
+<text x="48" y="157" font-size="24" font-weight="700">登録済みの鍵</text>
+<text x="48" y="194" font-size="23">利用者側：秘密鍵 ／ サービス：公開鍵</text>
+<rect x="28" y="249" width="544" height="134" rx="12" fill="#fff" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="287" font-size="26" font-weight="700">① サービス</text>
+<text x="48" y="326" font-size="24">今回の認証用に、予測困難な</text>
+<text x="48" y="362" font-size="24">チャレンジ（ランダム値）を作る</text>
+<path d="M85 392 V452" stroke="#466353" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="116" y="431" font-size="23">チャレンジ＋RP IDなど</text>
+<rect x="28" y="468" width="544" height="171" rx="12" fill="#fff" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="506" font-size="26" font-weight="700">② ブラウザー</text>
+<text x="48" y="545" font-size="24">要求元（origin）とRP IDの</text>
+<text x="48" y="581" font-size="24">対応を確認する</text>
+<text x="48" y="617" font-size="21" fill="#56685a">無関係な偽サイトは正規の鍵を使えない</text>
+<path d="M85 648 V708" stroke="#466353" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="116" y="687" font-size="23">RP ID＋クライアントデータのハッシュ</text>
+<rect x="28" y="724" width="544" height="207" rx="12" fill="#edf3e9" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="762" font-size="26" font-weight="700">③ 認証器（この例では端末内）</text>
+<text x="48" y="801" font-size="24">RP IDに対応する秘密鍵を選ぶ</text>
+<text x="48" y="837" font-size="24">指紋・顔・PINなどで本人確認</text>
+<text x="48" y="873" font-size="24">秘密鍵で署名を作る</text>
+<text x="48" y="908" font-size="21" fill="#56685a">秘密鍵・生体情報はログイン先に渡さない</text>
+<path d="M85 940 V1011" stroke="#466353" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="116" y="971" font-size="23">ブラウザー経由で</text>
+<text x="116" y="1002" font-size="23">署名＋検証用データを返す</text>
+<rect x="28" y="1027" width="544" height="247" rx="12" fill="#fff" stroke="#829c85" stroke-width="2"/>
+<text x="48" y="1065" font-size="26" font-weight="700">④ サービス</text>
+<text x="48" y="1104" font-size="24">登録済みの公開鍵で署名を検証</text>
+<text x="48" y="1140" font-size="24">今回のチャレンジ、origin、RP ID、</text>
+<text x="48" y="1176" font-size="24">必要な本人確認の結果なども確認</text>
+<text x="48" y="1231" font-size="26" font-weight="700">条件を満たせば、ログインを認める</text>
+<text x="32" y="1320" font-size="21">署名は、内容を隠すための暗号化ではない</text>
+<text x="32" y="1354" font-size="21">通信はHTTPSで保護。細部を省略した説明図</text>
+<text x="32" y="1387" font-size="19" fill="#56685a">出典：WebAuthn Level 3 §6.3.3・§7.2</text>
+</g></svg>
