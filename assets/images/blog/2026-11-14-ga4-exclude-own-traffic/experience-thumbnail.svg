@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">GA4 自分のアクセス除外を試した記録</title><desc id="desc">同じiPhoneで自宅Wi-Fiからモバイル回線に切り替え、GA4のリアルタイムで閲覧を確認した結果。</desc>
+<rect width="1200" height="630" fill="#f4f6f8"/><rect width="26" height="630" fill="#2f5f8f"/>
+<g font-family="Noto Sans CJK JP, sans-serif" fill="#1f3d5a">
+<text x="80" y="100" font-size="28" letter-spacing="3">ブログ運営の実験記録</text>
+<text x="75" y="230" font-size="100" font-weight="700">GA4</text>
+<text x="80" y="320" font-size="58" font-weight="700">自分のアクセスは除外された？</text>
+<rect x="80" y="370" width="1040" height="105" rx="12" fill="#1f3d5a"/>
+<text x="113" y="438" font-size="42" fill="#ffffff">自宅Wi-Fiでは除外、モバイル回線では計測</text>
+<text x="80" y="550" font-size="28">PCとiPhone 17 Proで試してみました</text>
+<text x="80" y="600" font-size="22" fill="#526a7b">Musashi Digital Studio</text>
+</g></svg>

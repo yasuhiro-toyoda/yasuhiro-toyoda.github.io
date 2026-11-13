@@ -26,3 +26,5 @@
   label: Git
 - slug: ipad
   label: iPad
+- slug: ga4
+  label: GA4

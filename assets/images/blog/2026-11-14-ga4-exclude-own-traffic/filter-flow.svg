@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 700" role="img" aria-labelledby="title desc">
+<title id="title">GA4の内部トラフィックの識別と除外</title>
+<desc id="desc">登録した自宅IPに一致するイベントをinternalとして識別し、データフィルタがテストなら集計に含め、有効で除外なら集計から外す。</desc>
+<defs>
+<marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1L10 6L1 11" fill="none" stroke="#52765c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="760" height="700" rx="24" fill="#f3f7f2"/>
+<g font-family="'Noto Sans CJK JP','Yu Gothic',Meiryo,sans-serif" text-anchor="middle" fill="#193129">
+<text x="380" y="55" font-size="31" font-weight="700">GA4の除外設定は2段階</text>
+<rect x="40" y="85" width="680" height="188" rx="16" fill="#fff" stroke="#9aaa9d" stroke-width="2"/>
+<text x="380" y="130" font-size="30" font-weight="700">① 内部トラフィックの定義</text>
+<text x="380" y="175" font-size="28">登録した自宅IPに一致するイベント</text>
+<rect x="119" y="195" width="522" height="49" rx="8" fill="#e7eee4"/>
+<text x="380" y="229" font-family="monospace" font-size="29" font-weight="700">traffic_type = internal</text>
+<path d="M380 273V324" stroke="#52765c" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+<text x="380" y="361" font-size="29" font-weight="700">② データフィルタで処理を選ぶ</text>
+<path d="M380 382V402H205V426M380 402H555V426" stroke="#52765c" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<path d="M205 404V426" stroke="#52765c" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+<rect x="40" y="435" width="330" height="171" rx="16" fill="#fff" stroke="#adc0d0" stroke-width="2"/>
+<rect x="390" y="435" width="330" height="171" rx="16" fill="#fff" stroke="#6a8b6a" stroke-width="2"/>
+<text x="205" y="481" font-size="32" font-weight="700" fill="#375870">テスト</text>
+<text x="205" y="529" font-size="29" font-weight="700">集計に含む</text>
+<text x="205" y="573" font-size="24">フィルタ名で対象を確認</text>
+<text x="555" y="481" font-size="32" font-weight="700" fill="#355b37">有効 ＋ 除外</text>
+<text x="555" y="529" font-size="29" font-weight="700">集計から外す</text>
+<text x="555" y="573" font-size="24">適用後のデータが対象</text>
+<text x="380" y="650" font-size="25">IPルールを作っただけでは除外されません</text>
+<text x="380" y="682" font-size="20" fill="#53655b">図は登録IPに一致したイベントの流れを示しています</text>
+</g>
+</svg>
+
