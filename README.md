@@ -66,6 +66,7 @@ PRの自動マージを事前に有効にせず、承認後に対象SHAを指定
 - 下書き: _drafts/slug.md または _drafts/YYYY/MM/slug.md
 - サムネイル: assets/images/blog/YYYY-MM-DD-short-slug/thumbnail.png
 - thumbnailには/assets/images/blog/...形式のパス、thumbnail_altには画像の説明を設定します。
+- SNS共有画像には、ページの `share_image` と `share_image_alt`、記事の `thumbnail` と `thumbnail_alt`、サイト共通画像の順に使います。個別の共有画像を設定する場合は、サイト内のルート相対パスまたはHTTPSの絶対URLと、画像の内容を表す代替テキストを指定します。共有用には5MB未満のPNG・JPEG・WebP・GIFを使います。
 - 参考画像はtemplates/thumbnail/にあります。見た目と容量を確認してから配置します。
 - ファイル名の日付とfront matterのdateを一致させ、日本時間の実際の公開日時を指定します。
 - 生成タイムゾーンは`_config.yml`の`Asia/Tokyo`を正本とします。CIとPages、ローカルの環境変数に依存させません。

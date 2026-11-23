@@ -32,6 +32,7 @@
     <meta property="og:title" content="{{ meta_title | strip | escape_once }}" />
     <meta property="og:description" content="{{ meta_description }}" />
     <meta property="og:url" content="{{ meta_url }}" />
+    {% include share-image.html %}
     <meta name="twitter:card" content="{{ site.seo.twitter_card | default: 'summary' }}" />
     <meta name="twitter:title" content="{{ meta_title | strip | escape_once }}" />
     <meta name="twitter:description" content="{{ meta_description }}" />

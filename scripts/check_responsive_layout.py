@@ -103,6 +103,38 @@ def check_content_bounds(page: Page):
     require(not outside, f"Content outside article: {outside}")
 
 
+def check_article_footer(page: Page) -> str:
+    footer = page.locator(".blog-post__footer")
+    unframed = footer.evaluate("""e => {
+      const style = getComputedStyle(e);
+      return style.borderLeftWidth === '0px' && style.borderRightWidth === '0px';
+    }""")
+    require(unframed, "The blog index link should not sit inside a bordered footer")
+    related = footer.locator(".post-related")
+    if not related.count():
+        return "back-only"
+    layout = related.evaluate("""panel => {
+      const box = panel.getBoundingClientRect();
+      const title = panel.querySelector('h2').getBoundingClientRect();
+      const list = panel.querySelector('ul').getBoundingClientRect();
+      const back = panel.parentElement.querySelector('.post-back').getBoundingClientRect();
+      return {
+        top: title.top - box.top, bottom: box.bottom - list.bottom,
+        left: list.left - box.left, right: box.right - list.right,
+        backGap: back.top - box.bottom,
+        overflow: panel.scrollWidth - panel.clientWidth,
+        underlined: [...panel.querySelectorAll('a')].every(a =>
+          getComputedStyle(a).textDecorationLine.includes('underline'))
+      };
+    }""")
+    require(min(layout[side] for side in ("top", "bottom", "left", "right")) >= 8
+            and abs(layout["left"] - layout["right"]) <= 1, f"Uneven or missing related panel inset: {layout}")
+    require(layout["backGap"] > 0, "The blog index link should be separate from the related panel")
+    require(layout["overflow"] <= 1, "Related titles overflow the panel")
+    require(layout["underlined"], "Related titles should be recognizable as links")
+    return "with-related"
+
+
 def check_links(page: Page, site: Path):
     links = page.locator(".site-nav a, .brand, .blog-post__footer a").evaluate_all("els => els.map(e => e.href)")
     for href in links:
@@ -220,6 +252,7 @@ def main() -> int:
                 result["negative_controls"] = "both original defects detected"
                 for width in WIDTHS:
                     page.set_viewport_size({"width": width, "height": 844})
+                    footer_samples = set()
                     for url in posts:
                         visit(page, origin + url)
                         data = geometry(page)
@@ -233,6 +266,12 @@ def main() -> int:
                             result["toc_pages"] += int(check_toc(page))
                             result["scrollable_code_blocks"] += check_code_scrolling(page)
                             check_geometry(geometry(page))
+                        if width in (390, 1440):
+                            kind = check_article_footer(page)
+                            if kind not in footer_samples:
+                                footer_samples.add(kind)
+                                page.locator(".blog-post__footer").screenshot(
+                                    path=str(args.report / f"{name}-footer-{kind}-{width}.png"))
                     for url in ("/", "/blog/"):
                         visit(page, origin + url)
                         require(page.evaluate("document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1"),
