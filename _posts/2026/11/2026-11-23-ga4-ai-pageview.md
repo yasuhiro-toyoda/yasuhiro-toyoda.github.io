@@ -25,7 +25,7 @@ excerpt: "ChatGPTに「ブログを開いて」と頼んだら、読者が1ペ�
 
 ## リアルタイムで確認できたこと
 
-2回のアクセスの約3分後、0時30分に確認した画面には、過去30分の「ブログ | Musashi Digital Studio」の表示が1回、`page_view` も1件と出ていた。
+2回のアクセスの約3分後、0時30分に確認した画面には、過去30分のブログ一覧の表示が1回、`page_view` も1件と出ていた。
 
 ![GA4のリアルタイム画面。ブログ一覧の表示が1回、page_view・session_start・user_engagementが各1件](/assets/images/blog/2026-11-23-ga4-ai-pageview/realtime-events.png)
 
