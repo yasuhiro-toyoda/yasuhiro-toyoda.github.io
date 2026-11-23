@@ -8,7 +8,7 @@ tags:
   - ga4
   - AI
 thumbnail: /assets/images/blog/2026-11-23-ga4-ai-pageview/thumbnail.png
-thumbnail_alt: "「AIの閲覧も1PVになる？」という見出しと、ChromeとPythonからページを開く様子を表す図"
+thumbnail_alt: "「AIの閲覧も1PVになる？」の見出しと、ノートPCでGA4の「1PV」を確認する女性のイラスト"
 excerpt: "ChatGPTに「ブログを開いて」と頼んだら、読者が1ページ見たときと同じように数えられるのだろうか。ChromeとPythonで同じページを開いた約3分後、GA4を見てみました。"
 ---
 
