@@ -1,0 +1,32 @@
+{%- assign default_image = site.seo.default_image -%}
+{%- assign image_path = default_image.path -%}
+{%- assign image_alt = default_image.alt -%}
+{%- assign supported_formats = 'jpg,jpeg,png,webp,gif' | split: ',' -%}
+{%- assign image_fields = 'share_image,thumbnail' | split: ',' -%}
+{%- for field in image_fields -%}
+  {%- assign candidate = page[field] | default: '' | strip -%}
+  {%- assign format = candidate | split: '#' | first | split: '?' | first | split: '.' | last | downcase -%}
+  {%- assign scheme = candidate | slice: 0, 8 -%}
+  {%- assign first_character = candidate | slice: 0, 1 -%}
+  {%- assign path_prefix = candidate | slice: 0, 2 -%}
+  {%- if supported_formats contains format -%}
+    {%- if scheme == 'https://' or first_character == '/' and path_prefix != '//' -%}
+      {%- assign alt_field = field | append: '_alt' -%}
+      {%- assign image_path = candidate -%}
+      {%- assign image_alt = page[alt_field] | default: page.title | default: site.title -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign image_url = image_path | absolute_url | escape -%}
+{%- assign format = image_path | split: '#' | first | split: '?' | first | split: '.' | last | downcase -%}
+{%- if format == 'jpg' -%}{%- assign format = 'jpeg' -%}{%- endif -%}
+<meta property="og:image" content="{{ image_url }}" />
+    <meta property="og:image:type" content="image/{{ format }}" />
+    <meta property="og:image:alt" content="{{ image_alt | escape }}" />
+{% if image_path == default_image.path %}
+    <meta property="og:image:width" content="{{ default_image.width }}" />
+    <meta property="og:image:height" content="{{ default_image.height }}" />
+{% endif %}
+    <meta name="twitter:image" content="{{ image_url }}" />
+    <meta name="twitter:image:alt" content="{{ image_alt | truncate: 420, '' | escape }}" />

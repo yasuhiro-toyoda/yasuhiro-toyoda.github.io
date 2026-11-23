@@ -12,7 +12,12 @@ brand:
   operator_label: Operated by Musashi Digital Studio
 seo:
   locale: ja_JP
-  twitter_card: summary
+  twitter_card: summary_large_image
+  default_image:
+    path: /assets/brand/share-card.png
+    alt: Musashi Digital Studioの文字ロゴとサイトのドメイン名
+    width: 1200
+    height: 630
 markdown: kramdown
 kramdown:
   input: GFM
