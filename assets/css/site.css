@@ -1359,8 +1359,12 @@ h6 {
   border-bottom: 2px solid var(--accent);
 }
 
+.blog-post .post-body tbody td {
+  background: var(--surface);
+}
+
 .blog-post .post-body tbody tr:nth-child(even) td {
-  background: var(--surface-soft);
+  background: var(--surface-alt);
 }
 
 .blog-post .post-body th code,
