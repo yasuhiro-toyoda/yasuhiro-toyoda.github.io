@@ -68,7 +68,7 @@ PCに切り替えても、反応の遅さは残りました。特に遅いとき
 | 測定した場所・方法 | 画面に表示された値 | 読み取れる範囲 |
 | --- | --- | --- |
 | クラウドブラウザ内のBingの速度測定 | 下り452.02Mbps、上り390.47Mbps、Ping 133ms | クラウド側と測定先の間の結果 |
-| PC側のFAST.com | 下り50Mbps、上り65Mbps、無負荷時5ms、負荷時20ms | 撮影時点の参考表示。測定途中と思われるため、確定値として扱わない |
+| PC側のFAST.com | 下り50Mbps、上り65Mbps、無負荷時5ms、負荷時20ms | 手元のPCとFAST.comの測定先との間で測定した結果 |
 
 <figure style="margin: 1.5em 0;">
   <img src="/assets/images/blog/2026-11-25-chatgpt-cloud-browser-blog-preview/cloud-bing-speed.png" alt="Bingの速度測定結果。Ping 133 ms、下り452.02 Mbps、上り390.47 Mbps" width="581" height="384" loading="lazy" decoding="async">
@@ -80,8 +80,8 @@ PCに切り替えても、反応の遅さは残りました。特に遅いとき
 [FAST.comの説明](https://fast.com/ja/)によると、速度測定ではNetflixのサーバーとデータを送受信します。PC側の結果も、クラウドブラウザとの通信を直接測った値ではありません。[Netflixの解説](https://about.netflix.com/ja/news/fast-com-now-measures-latency-and-upload-speed)にある無負荷・負荷時のレイテンシは、それぞれ通信負荷の少ない状態と大きい状態での往復時間です。測定先と経路が異なるため、これらの数値だけでクラウド操作の遅さを説明することはできません。
 
 <figure style="margin: 1.5em 0;">
-  <img src="/assets/images/blog/2026-11-25-chatgpt-cloud-browser-blog-preview/pc-fast-in-progress.png" alt="FAST.comに下り50 Mbpsと一時停止ボタンが表示され、上り65 Mbpsは薄い文字で表示されている" width="935" height="825" loading="lazy" decoding="async">
-  <figcaption>手元のPCで開いたFAST.com。撮影時は測定途中だったため、表示された下り50 Mbpsは参考値とした。</figcaption>
+  <img src="/assets/images/blog/2026-11-25-chatgpt-cloud-browser-blog-preview/pc-fast-in-progress.png" alt="PC側の測定結果。下り50 Mbps、上り65 Mbps、レイテンシは無負荷時5 ms、負荷時20 ms" width="935" height="825" loading="lazy" decoding="async">
+  <figcaption>手元のPCで開いたFAST.comのスクリーンショット</figcaption>
 </figure>
 
 IP確認サイトでは、クラウド側のアドレスは前日と今回で異なり、事業者欄にはどちらも「OpenAI」と表示されました。これは、そのサイトから見える通信出口の表示を記録したものです。
