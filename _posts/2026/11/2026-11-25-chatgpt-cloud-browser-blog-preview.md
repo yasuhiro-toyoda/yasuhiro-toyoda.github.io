@@ -56,6 +56,11 @@ PCに切り替えても、反応の遅さは残りました。特に遅いとき
 
 なお、**iPhoneから操作している画面も、クラウド上のブラウザで表示されたものです。** 今回はPC幅の画面をスマホで見ており、指で拡大してもスマホ向けレイアウトの確認になるわけではありません。iPhoneのSafari自体の表示確認とも、確認できる範囲が異なります。
 
+<figure style="margin: 1.5em 0;">
+  <img src="/assets/images/blog/2026-11-25-chatgpt-cloud-browser-blog-preview/iphone-cloud-preview.png" alt="「クラウドブラウザ・手動操作中」の表示と、記事カードが横3列に並んだブログの記事一覧" width="706" height="613" loading="lazy" decoding="async">
+  <figcaption>11月24日、iPhoneから手動操作したときの画面。スマホの中にPC幅の記事一覧が表示されている。操作状態と記事一覧を抜粋した。</figcaption>
+</figure>
+
 ## 速度を測っても、遅さの原因までは分からなかった
 
 反応が遅い理由を考える材料として、通信速度も確認しました。ただし、測った経路が異なります。
@@ -65,9 +70,19 @@ PCに切り替えても、反応の遅さは残りました。特に遅いとき
 | クラウドブラウザ内のBingの速度測定 | 下り452.02Mbps、上り390.47Mbps、Ping 133ms | クラウド側と測定先の間の結果 |
 | PC側のFAST.com | 下り50Mbps、上り65Mbps、無負荷時5ms、負荷時20ms | 撮影時点の参考表示。測定途中と思われるため、確定値として扱わない |
 
+<figure style="margin: 1.5em 0;">
+  <img src="/assets/images/blog/2026-11-25-chatgpt-cloud-browser-blog-preview/cloud-bing-speed.png" alt="Bingの速度測定結果。Ping 133 ms、下り452.02 Mbps、上り390.47 Mbps" width="581" height="384" loading="lazy" decoding="async">
+  <figcaption>クラウドブラウザからBingで測定した結果。Ping 133 msはクラウド側と測定先を往復する時間を示す。</figcaption>
+</figure>
+
 クラウド内で下りが速く測れても、それだけで手元の操作がすぐ画面に反映されるとは判断できません。手元の端末からクラウドへ操作を伝え、変化した画面を受け取る部分もあります。今回の数値だけでは、どこで待ち時間が生じたかは切り分けられませんでした。
 
 [FAST.comの説明](https://fast.com/ja/)によると、速度測定ではNetflixのサーバーとデータを送受信します。PC側の結果も、クラウドブラウザとの通信を直接測った値ではありません。[Netflixの解説](https://about.netflix.com/ja/news/fast-com-now-measures-latency-and-upload-speed)にある無負荷・負荷時のレイテンシは、それぞれ通信負荷の少ない状態と大きい状態での往復時間です。測定先と経路が異なるため、これらの数値だけでクラウド操作の遅さを説明することはできません。
+
+<figure style="margin: 1.5em 0;">
+  <img src="/assets/images/blog/2026-11-25-chatgpt-cloud-browser-blog-preview/pc-fast-in-progress.png" alt="FAST.comに下り50 Mbpsと一時停止ボタンが表示され、上り65 Mbpsは薄い文字で表示されている" width="935" height="825" loading="lazy" decoding="async">
+  <figcaption>手元のPCで開いたFAST.com。撮影時は測定途中だったため、表示された下り50 Mbpsは参考値とした。</figcaption>
+</figure>
 
 IP確認サイトでは、クラウド側のアドレスは前日と今回で異なり、事業者欄にはどちらも「OpenAI」と表示されました。これは、そのサイトから見える通信出口の表示を記録したものです。
 
