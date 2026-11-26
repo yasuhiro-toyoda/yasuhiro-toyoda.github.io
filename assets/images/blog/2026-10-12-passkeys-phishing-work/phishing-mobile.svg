@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 1212" width="360" height="1212" role="img" aria-labelledby="title desc"><title id="title">偽サイトでのパスワードとパスキーの違い</title><desc id="desc">パスワードと手入力のワンタイムコードは偽サイトで盗まれ、本物へ中継され得る。パスキーは無関係な偽サイトで本物のRP IDを使う要求をブラウザーが拒否する。</desc><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8 4L0 8Z" fill="#557b60"/></marker></defs><rect width="360" height="1212" rx="18" fill="#fafaf6"/><g font-family="&#x27;Noto Sans CJK JP&#x27;,&#x27;Yu Gothic&#x27;,sans-serif"><text x="24" y="42" font-size="23" fill="#23332b" font-weight="700" text-anchor="start">偽サイトに誘導されたら？</text>
+<text x="24" y="78" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">本物：shop.example</text>
+<text x="24" y="106" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">偽物：shop-login.example</text>
+<g id="otp-fake" data-box="24,144,312,149"><rect x="24" y="144" width="312" height="149" rx="14" fill="#fcf0e9" stroke="#90523b" stroke-width="2"/>
+<text x="42" y="179" font-size="20" fill="#90523b" font-weight="700" text-anchor="start">パスワード＋コードの場合</text>
+<text x="42" y="214" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">利用者が偽サイトに入力。</text>
+<text x="42" y="242" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">偽サイトがパスワードや</text>
+<text x="42" y="270" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">ワンタイムコードを受け取る。</text>
+</g>
+<path data-from="otp-fake" data-to="otp-real" d="M52 300 L52 372" fill="none" stroke="#557b60" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="72" y="325" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">攻撃者が有効な間に中継</text>
+<g id="otp-real" data-box="24,381,312,121"><rect x="24" y="381" width="312" height="121" rx="14" fill="#fcf0e9" stroke="#90523b" stroke-width="2"/>
+<text x="42" y="416" font-size="20" fill="#90523b" font-weight="700" text-anchor="start">本物のサイト</text>
+<text x="42" y="451" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">受け取った値で、攻撃者が</text>
+<text x="42" y="479" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">ログインできる可能性がある。</text>
+</g>
+<g id="passkey-fake" data-box="24,534,312,121"><rect x="24" y="534" width="312" height="121" rx="14" fill="#edf3eb" stroke="#426449" stroke-width="2"/>
+<text x="42" y="569" font-size="20" fill="#426449" font-weight="700" text-anchor="start">パスキーの場合</text>
+<text x="42" y="604" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">偽サイトが本物のRP ID、</text>
+<text x="42" y="632" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">shop.exampleで処理を要求。</text>
+</g>
+<path data-from="passkey-fake" data-to="browser-reject" d="M52 662 L52 734" fill="none" stroke="#557b60" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="72" y="687" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">利用先とRP IDの検証</text>
+<g id="browser-reject" data-box="24,743,312,177"><rect x="24" y="743" width="312" height="177" rx="14" fill="#edf3eb" stroke="#426449" stroke-width="2"/>
+<text x="42" y="778" font-size="20" fill="#426449" font-weight="700" text-anchor="start">× ブラウザーが拒否</text>
+<text x="42" y="813" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">無関係な偽サイトでは、</text>
+<text x="42" y="841" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">本物のRP IDを使えない。</text>
+<text x="42" y="869" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">本物用の鍵による署名は</text>
+<text x="42" y="897" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">この要求では得られない。</text>
+</g>
+<text x="24" y="942" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">偽物自身のRP IDを使っても、</text>
+<text x="24" y="970" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">本物用の鍵は対応しない。</text>
+<text x="24" y="998" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">本物側もorigin・チャレンジ・</text>
+<text x="24" y="1026" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">RP IDハッシュ・署名を検証する。</text>
+<text x="24" y="1094" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">正しく実装された認証の例。</text>
+<text x="24" y="1122" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">復旧・別の認証・端末侵害や</text>
+<text x="24" y="1150" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">ログイン後の被害は別の問題。</text></g></svg>

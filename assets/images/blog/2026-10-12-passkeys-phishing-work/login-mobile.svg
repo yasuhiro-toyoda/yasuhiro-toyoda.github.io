@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 1218" width="360" height="1218" role="img" aria-labelledby="title desc"><title id="title">パスキーでログインする流れ</title><desc id="desc">同じスマートフォンのブラウザーと認証器を使い、端末での本人確認を必須にした例。秘密鍵は認証器側、公開鍵はサイト側にある。</desc><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8 4L0 8Z" fill="#557b60"/></marker></defs><rect width="360" height="1218" rx="18" fill="#fafaf6"/><g font-family="&#x27;Noto Sans CJK JP&#x27;,&#x27;Yu Gothic&#x27;,sans-serif"><text x="24" y="42" font-size="23" fill="#23332b" font-weight="700" text-anchor="start">パスキーでログインする流れ</text>
+<text x="24" y="78" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">登録済み：認証器側に秘密鍵、</text>
+<text x="24" y="106" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">サイト側に公開鍵。本人確認は必須。</text>
+<g id="site-challenge" data-box="24,144,312,121"><rect x="24" y="144" width="312" height="121" rx="14" fill="#edf3eb" stroke="#426449" stroke-width="2"/>
+<text x="42" y="179" font-size="20" fill="#426449" font-weight="700" text-anchor="start">1 サイト：shop.example</text>
+<text x="42" y="214" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">今回のチャレンジを作る。</text>
+<text x="42" y="242" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">予測できない確認用データ。</text>
+</g>
+<path data-from="site-challenge" data-to="browser-check" d="M52 272 L52 344" fill="none" stroke="#557b60" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="72" y="297" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">チャレンジ＋RP ID</text>
+<g id="browser-check" data-box="24,353,312,149"><rect x="24" y="353" width="312" height="149" rx="14" fill="#edf3eb" stroke="#426449" stroke-width="2"/>
+<text x="42" y="388" font-size="20" fill="#426449" font-weight="700" text-anchor="start">2 ブラウザー</text>
+<text x="42" y="423" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">利用先とRP IDの対応を検証。</text>
+<text x="42" y="451" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">チャレンジ・originなどから</text>
+<text x="42" y="479" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">clientDataJSONを作る。</text>
+</g>
+<path data-from="browser-check" data-to="authenticator-sign" d="M52 509 L52 581" fill="none" stroke="#557b60" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="72" y="534" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">RP ID＋</text>
+<text x="72" y="562" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">clientDataJSONのハッシュ</text>
+<g id="authenticator-sign" data-box="24,590,312,205"><rect x="24" y="590" width="312" height="205" rx="14" fill="#edf3eb" stroke="#426449" stroke-width="2"/>
+<text x="42" y="625" font-size="20" fill="#426449" font-weight="700" text-anchor="start">3 認証器（端末内）</text>
+<text x="42" y="660" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">指紋・顔やPINで本人確認。</text>
+<text x="42" y="688" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">秘密鍵で署名する。</text>
+<text x="42" y="716" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">署名対象は認証器データと</text>
+<text x="42" y="744" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">clientDataJSONのハッシュ。</text>
+<text x="42" y="772" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">秘密鍵・生体情報は送らない。</text>
+</g>
+<path data-from="authenticator-sign" data-to="site-verify" d="M52 802 L52 892" fill="none" stroke="#557b60" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="72" y="827" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">署名＋認証器データ＋</text>
+<text x="72" y="855" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">clientDataJSON</text>
+<text x="72" y="883" font-size="16" fill="#557b60" font-weight="400" text-anchor="start">（ブラウザーを経由）</text>
+<g id="site-verify" data-box="24,901,312,205"><rect x="24" y="901" width="312" height="205" rx="14" fill="#edf3eb" stroke="#426449" stroke-width="2"/>
+<text x="42" y="936" font-size="20" fill="#426449" font-weight="700" text-anchor="start">4 サイト：shop.example</text>
+<text x="42" y="971" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">公開鍵で署名を検証。</text>
+<text x="42" y="999" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">チャレンジ・origin、</text>
+<text x="42" y="1027" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">RP IDのハッシュ、操作・</text>
+<text x="42" y="1055" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">本人確認結果なども検証。</text>
+<text x="42" y="1083" font-size="18" fill="#23332b" font-weight="400" text-anchor="start">条件が合えばログイン。</text>
+</g>
+<text x="24" y="1128" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">通信・拡張機能の細部は省略。</text>
+<text x="24" y="1156" font-size="16" fill="#52675a" font-weight="400" text-anchor="start">別端末・同期の形態は本文を参照。</text></g></svg>
